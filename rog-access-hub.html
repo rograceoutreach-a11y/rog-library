@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ROG Complete Access Hub — Reflections of Grace Outreach Ministries</title>
+<style>
+  :root {
+    --navy:#1B3A6B; --navy-dk:#0d2245; --navy-lt:#2a5298;
+    --gold:#B8860B; --gold-lt:#F5C518; --gold-pale:#FDF3D0;
+    --p1:#1B3A6B; --p2:#2E5FA3; --p3:#B8860B;
+    --p4:#1B5E20; --p5:#7B1A1A; --p6:#4A148C;
+    --teal:#0F5F5F; --rose:#7B1A3A;
+    --green:#1B5E20; --green-lt:#E8F5E9;
+    --gray1:#F4F1EB; --gray2:#E5DFD3; --gray3:#9A9080;
+    --text:#2D2A24; --white:#FFFFFF;
+    --ff-d:'Georgia',serif; --ff-b:'Inter','Segoe UI',sans-serif;
+    --radius:12px; --shadow:0 4px 24px rgba(0,0,0,.09);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--ff-b);background:var(--gray1);color:var(--text);line-height:1.6}
+  a{text-decoration:none;color:inherit}
+
+  /* ── TOPBAR ── */
+  .topbar{background:var(--navy-dk);padding:10px 24px;display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:300}
+  .topbar-logo{font-family:var(--ff-d);font-size:15px;color:#fff;font-weight:700;line-height:1.2}
+  .topbar-sub{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.09em}
+  .topbar-links{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .topbar-links a{font-size:12px;font-weight:600;color:rgba(255,255,255,.75);padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,.15);transition:all .2s}
+  .topbar-links a:hover{background:rgba(255,255,255,.1);color:#fff}
+  .topbar-links .tl-gold{background:var(--gold);color:var(--navy)!important;border-color:var(--gold)!important}
+  .topbar-links .tl-green{background:var(--green);color:#fff!important;border-color:var(--green)!important}
+
+  /* ── HERO ── */
+  .hero{background:linear-gradient(140deg,var(--navy-dk) 0%,var(--navy) 50%,#2a1a5e 100%);padding:64px 32px 52px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:'✝';position:absolute;font-size:320px;color:rgba(255,255,255,.03);top:-60px;left:50%;transform:translateX(-50%);pointer-events:none}
+  .hero-eyebrow{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;border-radius:100px;margin-bottom:18px}
+  .hero h1{font-family:var(--ff-d);font-size:clamp(26px,4vw,48px);color:#fff;font-weight:700;line-height:1.2;margin-bottom:14px}
+  .hero-sub{font-size:16px;color:rgba(255,255,255,.7);max-width:600px;margin:0 auto 32px;line-height:1.75}
+  .hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+  .hstat{text-align:center}
+  .hstat-n{font-family:var(--ff-d);font-size:38px;font-weight:700;color:var(--gold-lt);line-height:1}
+  .hstat-l{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+  .hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .hero-pill{padding:9px 20px;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:all .25s}
+  .hero-pill:hover{transform:translateY(-2px);opacity:.9}
+
+  /* ── SECTION HEADERS ── */
+  .section-head{max-width:1140px;margin:0 auto;padding:40px 24px 20px}
+  .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .section-title{font-family:var(--ff-d);font-size:clamp(20px,3vw,30px);color:var(--navy);font-weight:700;margin-bottom:6px}
+  .section-desc{font-size:14px;color:var(--gray3);line-height:1.7;max-width:680px}
+  .divider{border:none;border-top:2px solid var(--gray2);margin:0}
+
+  /* ── JUMP NAV ── */
+  .jump-nav{background:var(--white);border-bottom:2px solid var(--gray2);padding:0 24px;overflow-x:auto;white-space:nowrap;position:sticky;top:55px;z-index:200}
+  .jump-nav-inner{display:inline-flex;gap:0;max-width:1140px;margin:0 auto}
+  .jn-item{display:inline-block;padding:13px 16px;font-size:12px;font-weight:700;color:var(--gray3);border-bottom:3px solid transparent;transition:all .2s;cursor:pointer;white-space:nowrap}
+  .jn-item:hover{color:var(--navy);border-bottom-color:var(--gray2)}
+  .jn-item.active{color:var(--navy);border-bottom-color:var(--navy)}
+
+  /* ── BOOKS BANNER ── */
+  .books-banner{max-width:1140px;margin:0 auto;padding:0 24px 32px}
+  .books-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .book-card{background:var(--white);border-radius:var(--radius);border:1px solid var(--gray2);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+  .book-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.13)}
+  .book-card-hdr{padding:20px 22px 14px}
+  .book-card-num{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;opacity:.7}
+  .book-card-title{font-family:var(--ff-d);font-size:17px;font-weight:700;line-height:1.3;color:#fff;margin-bottom:5px}
+  .book-card-author{font-size:12px;color:rgba(255,255,255,.65)}
+  .book-card-body{padding:16px 22px}
+  .book-card-desc{font-size:13px;color:var(--text);line-height:1.7;margin-bottom:14px}
+  .book-card-links{display:flex;gap:8px;flex-wrap:wrap}
+  .bk-btn{display:inline-block;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;transition:all .2s}
+  .bk-btn:hover{transform:translateY(-1px)}
+  .bk-btn-primary{color:#fff}
+  .bk-btn-ghost{background:var(--gray1);color:var(--navy);border:1px solid var(--gray2)}
+  .bk-btn-ghost:hover{background:var(--gray2)}
+  .book-chapters{padding:0 22px 18px}
+  .book-ch-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray3);margin-bottom:8px}
+  .book-ch-list{display:flex;flex-direction:column;gap:4px}
+  .book-ch-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:7px;background:var(--gray1);font-size:12px;color:var(--navy);font-weight:500;border:1px solid var(--gray2)}
+  .book-ch-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0}
+
+  /* ── PHASES ── */
+  .phases-wrap{max-width:1140px;margin:0 auto;padding:0 24px 48px}
+  .phase-block{margin-bottom:40px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:var(--white)}
+  .phase-hdr{padding:24px 28px 20px;position:relative;overflow:hidden}
+  .phase-hdr::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 8px)}
+  .phase-hdr-top{display:flex;align-items:center;gap:16px;margin-bottom:12px;position:relative;z-index:1}
+  .phase-num-badge{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--ff-d);font-size:18px;font-weight:700;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.3)}
+  .phase-hdr-info{flex:1}
+  .phase-hdr-title{font-family:var(--ff-d);font-size:22px;color:#fff;font-weight:700;line-height:1.2}
+  .phase-hdr-sub{font-size:13px;color:rgba(255,255,255,.65);font-style:italic;margin-top:2px}
+  .phase-hdr-desc{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;max-width:700px;position:relative;z-index:1}
+
+  /* phase link pills */
+  .phase-links{display:flex;gap:8px;flex-wrap:wrap;padding:14px 28px;background:rgba(0,0,0,.15)}
+  .pl-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);transition:all .2s;white-space:nowrap}
+  .pl-btn:hover{background:rgba(255,255,255,.28);transform:translateY(-1px)}
+  .pl-btn-primary{background:rgba(255,255,255,.9)!important;color:var(--navy)!important;border-color:transparent!important}
+  .pl-btn-primary:hover{background:#fff!important}
+
+  /* units grid */
+  .units-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--gray2)}
+  .unit-card{background:var(--white);padding:18px 20px;transition:background .15s}
+  .unit-card:hover{background:#FAFAF7}
+  .unit-num{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray3);margin-bottom:6px}
+  .unit-title{font-family:var(--ff-d);font-size:15px;color:var(--navy);font-weight:600;margin-bottom:6px;line-height:1.35}
+  .unit-sr{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:7px}
+  .unit-sv{font-size:12px;color:var(--gray3);font-style:italic;line-height:1.6;margin-bottom:8px;border-left:3px solid var(--gold-pale);padding-left:8px}
+  .unit-kp{display:flex;flex-direction:column;gap:3px}
+  .unit-kp-item{font-size:12px;color:var(--text);padding-left:12px;position:relative;line-height:1.5}
+  .unit-kp-item::before{content:'›';position:absolute;left:0;color:var(--gray3)}
+
+  /* phase cross-link */
+  .phase-curriculum-link{display:flex;align-items:center;gap:12px;padding:14px 28px;background:var(--gold-pale);border-top:1px solid rgba(184,134,11,.2)}
+  .pcl-icon{font-size:20px}
+  .pcl-text{flex:1}
+  .pcl-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:2px}
+  .pcl-desc{font-size:13px;color:var(--text);line-height:1.5}
+  .pcl-btn{padding:8px 18px;border-radius:8px;font-size:12px;font-weight:700;background:var(--navy);color:#fff;white-space:nowrap;transition:all .2s}
+  .pcl-btn:hover{background:var(--navy-dk);transform:translateY(-1px)}
+
+  /* ── GLOBAL LINKS PANEL ── */
+  .global-links{max-width:1140px;margin:0 auto;padding:0 24px 48px}
+  .gl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .gl-card{background:var(--white);border-radius:var(--radius);padding:18px 20px;border:1px solid var(--gray2);display:flex;gap:12px;align-items:flex-start;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .gl-card:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .gl-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+  .gl-info{}
+  .gl-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px;line-height:1.3}
+  .gl-meta{font-size:12px;color:var(--gray3);margin-bottom:8px;line-height:1.4}
+  .gl-link{display:inline-block;font-size:12px;font-weight:700;color:var(--navy);padding:5px 12px;border-radius:6px;border:1.5px solid var(--gray2);background:var(--gray1);transition:all .2s}
+  .gl-link:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  /* ── FOOTER ── */
+  .footer{background:var(--navy-dk);padding:48px 24px 32px;text-align:center;border-top:3px solid var(--gold)}
+  .footer-cross{font-size:32px;color:var(--gold);margin-bottom:16px}
+  .footer-verse{font-family:var(--ff-d);font-size:16px;color:rgba(255,255,255,.75);font-style:italic;max-width:580px;margin:0 auto 8px;line-height:1.75}
+  .footer-ref{font-size:12px;color:var(--gold);font-weight:700;margin-bottom:28px}
+  .footer-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+  .footer-links a{font-size:12px;color:rgba(255,255,255,.55);transition:color .2s}
+  .footer-links a:hover{color:#fff}
+  .footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:680px){
+    .topbar-links{display:none}
+    .hero{padding:44px 20px 36px}
+    .phase-hdr-top{flex-wrap:wrap}
+    .phase-links{padding:12px 18px}
+    .unit-card{padding:14px 16px}
+    .phase-hdr{padding:18px 18px 16px}
+    .units-grid{grid-template-columns:1fr}
+    .hero-stats{gap:20px}
+    .hstat-n{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div>
+    <div class="topbar-logo">Reflections of Grace</div>
+    <div class="topbar-sub">Outreach Ministries, Inc.</div>
+  </div>
+  <div class="topbar-links">
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/" target="_blank">&#8592; Training Portal</a>
+    <a href="https://reflectionsofgraceministryportal.netlify.app/" target="_blank">Ministry Portal</a>
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/#/enroll" target="_blank" class="tl-gold">Enroll Free</a>
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/#/donate" target="_blank" class="tl-green">&#10084; Give</a>
+  </div>
+</div>
+
+<!-- ── JUMP NAV ── -->
+<nav class="jump-nav">
+  <div class="jump-nav-inner">
+    <div class="jn-item" onclick="scrollTo('books')">📚 Book Curriculum</div>
+    <div class="jn-item" onclick="scrollTo('phase01')">Phase 01 · Foundations</div>
+    <div class="jn-item" onclick="scrollTo('phase02')">Phase 02 · Vacuum Effect</div>
+    <div class="jn-item" onclick="scrollTo('phase03')">Phase 03 · Counseling</div>
+    <div class="jn-item" onclick="scrollTo('phase04')">Phase 04 · Believe Now</div>
+    <div class="jn-item" onclick="scrollTo('phase05')">Phase 05 · Church Issues</div>
+    <div class="jn-item" onclick="scrollTo('phase06')">Phase 06 · Gen X</div>
+    <div class="jn-item" onclick="scrollTo('alllinks')">🔗 All Links</div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">Complete Access Hub</div>
+  <h1>Reflections of Grace<br>Training &amp; Curriculum</h1>
+  <p class="hero-sub">Every phase, every unit, every book, every link — one page. Start anywhere. Go as deep as you choose.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Phases</div></div>
+    <div class="hstat"><div class="hstat-n">36</div><div class="hstat-l">Training Units</div></div>
+    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l">Book Curricula</div></div>
+    <div class="hstat"><div class="hstat-n">22</div><div class="hstat-l">Book Chapters</div></div>
+    <div class="hstat"><div class="hstat-n">88</div><div class="hstat-l">Quiz Questions</div></div>
+  </div>
+  <div class="hero-pills">
+    <div class="hero-pill" style="background:#1B3A6B;color:#fff;border-color:#2a5298" onclick="scrollTo('phase01')">Phase 01</div>
+    <div class="hero-pill" style="background:#2E5FA3;color:#fff;border-color:#3a72c4" onclick="scrollTo('phase02')">Phase 02</div>
+    <div class="hero-pill" style="background:#B8860B;color:#fff;border-color:#d4a012" onclick="scrollTo('phase03')">Phase 03</div>
+    <div class="hero-pill" style="background:#1B5E20;color:#fff;border-color:#2e7d32" onclick="scrollTo('phase04')">Phase 04</div>
+    <div class="hero-pill" style="background:#7B1A1A;color:#fff;border-color:#9c2626" onclick="scrollTo('phase05')">Phase 05</div>
+    <div class="hero-pill" style="background:#4A148C;color:#fff;border-color:#6a1fb5" onclick="scrollTo('phase06')">Phase 06</div>
+    <div class="hero-pill" style="background:var(--gold);color:var(--navy);border-color:var(--gold-lt)" onclick="scrollTo('books')">📚 Books</div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     BOOK CURRICULUM SECTION
+═══════════════════════════════════════════════════════ -->
+<div id="books">
+  <div class="section-head">
+    <div class="section-eyebrow">📚 Book Curriculum</div>
+    <div class="section-title">Three-Book Study Curriculum</div>
+    <p class="section-desc">Dedicated chapter-by-chapter curricula for three books — each chapter is a full training module with scripture anchor, overview, quiz, and discussion thread prompts.</p>
+  </div>
+  <div class="books-banner">
+    <div class="books-grid">
+
+      <!-- Book I -->
+      <div class="book-card">
+        <div class="book-card-hdr" style="background:linear-gradient(135deg,#1B3A6B,#0d2245)">
+          <div class="book-card-num" style="color:rgba(255,255,255,.55)">Book I · Spiritual Formation</div>
+          <div class="book-card-title">Praying to Know Him,<br>Praying From My Soul</div>
+          <div class="book-card-author">Denise Ford-Walker</div>
+        </div>
+        <div class="book-card-body">
+          <p class="book-card-desc">A devotional-training journey through the disciplines of prayer — from the first cry of the soul to deep intimacy with God. Each of the 8 chapters is a full training module with quiz and discussion.</p>
+          <div class="book-card-links">
+            <a href="https://www.amazon.com/Denise-P.-Ford/e/B08WQ7PY8N" target="_blank" rel="noopener" class="bk-btn bk-btn-primary" style="background:#1B3A6B">📖 Find Book →</a>
+            <a href="https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf" target="_blank" rel="noopener" class="bk-btn bk-btn-ghost">🎵 Spotify</a>
+          </div>
+        </div>
+        <div class="book-chapters">
+          <div class="book-ch-label">8 Chapter-Modules</div>
+          <div class="book-ch-list">
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">1</div>The Cry of the Soul — Why We Pray</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">2</div>Knowing God Through Prayer — The Intimacy Invitation</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">3</div>Praying From the Soul — Beyond Words</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">4</div>Persistent Prayer — When God Seems Silent</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">5</div>Intercessory Prayer — Carrying Others to God</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">6</div>Prayer and Spiritual Warfare — Praying With Authority</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">7</div>Fasting and Prayer — When the Soul Goes Deeper</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#1B3A6B">8</div>A Life of Prayer — From Discipline to Communion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book II -->
+      <div class="book-card">
+        <div class="book-card-hdr" style="background:linear-gradient(135deg,#0F5F5F,#073a3a)">
+          <div class="book-card-num" style="color:rgba(255,255,255,.55)">Book II · Faith &amp; Perseverance</div>
+          <div class="book-card-title">Holding On When It Is<br>Destined to Be Yours</div>
+          <div class="book-card-author">Denise Ford-Walker</div>
+        </div>
+        <div class="book-card-body">
+          <p class="book-card-desc">A bold declaration that what God has promised, He will deliver. Each of the 8 chapters equips trainees with biblical and practical tools for persevering faith through delays, opposition, and doubt.</p>
+          <div class="book-card-links">
+            <a href="https://www.amazon.com/Denise-P.-Ford/e/B08WQ7PY8N" target="_blank" rel="noopener" class="bk-btn bk-btn-primary" style="background:#0F5F5F">📖 Find Book →</a>
+            <a href="https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf" target="_blank" rel="noopener" class="bk-btn bk-btn-ghost">🎵 Spotify</a>
+          </div>
+        </div>
+        <div class="book-chapters">
+          <div class="book-ch-label">8 Chapter-Modules</div>
+          <div class="book-ch-list">
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">1</div>The Promise Stands — God's Covenant Faithfulness</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">2</div>The Delay Is Not a Denial — God's Timing</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">3</div>Opposition in the Promised Land</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">4</div>Letting Go of What Hinders</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">5</div>The Faith That Does Not Faint</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">6</div>Community and the Promise</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">7</div>The Testimony Fuel</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#0F5F5F">8</div>The Moment of Receiving</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book III -->
+      <div class="book-card">
+        <div class="book-card-hdr" style="background:linear-gradient(135deg,#7B1A3A,#4a0f24)">
+          <div class="book-card-num" style="color:rgba(255,255,255,.55)">Book III · Professional Academic</div>
+          <div class="book-card-title">Psychology, Theology &amp;<br>Spirituality in Christian Counseling</div>
+          <div class="book-card-author">Mark R. McMinn, Ph.D.</div>
+        </div>
+        <div class="book-card-body">
+          <p class="book-card-desc">The landmark professional text for integrating psychology, theology, and spiritual disciplines in clinical practice. Graduate-level curriculum for counselors and ministry trainers.</p>
+          <div class="book-card-links">
+            <a href="https://archive.org/search?query=psychology+theology+spirituality+mcminn" target="_blank" rel="noopener" class="bk-btn bk-btn-primary" style="background:#7B1A3A">📖 Find Book →</a>
+            <a href="https://caps.net/jpc/" target="_blank" rel="noopener" class="bk-btn bk-btn-ghost">📄 CAPS Journal</a>
+          </div>
+        </div>
+        <div class="book-chapters">
+          <div class="book-ch-label">6 Chapter-Modules</div>
+          <div class="book-ch-list">
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">1</div>The Challenge of Integration — Three-Domain Model</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">2</div>Prayer in Counseling — Ethics, Research &amp; Practice</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">3</div>Scripture in Counseling — Tool or Weapon?</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">4</div>Confession in Counseling — Sin, Grace &amp; Healing</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">5</div>Forgiveness in Counseling — The REACH Model</div>
+            <div class="book-ch-item"><div class="book-ch-num" style="background:#7B1A3A">6</div>Redemption and the Counseling Relationship</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /books-grid -->
+  </div><!-- /books-banner -->
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 01 — BIBLICAL FOUNDATIONS
+═══════════════════════════════════════════════════════ -->
+<div id="phase01">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 01 of 06</div>
+    <div class="section-title">Biblical Foundations</div>
+    <p class="section-desc">Establish a solid scriptural foundation for Christian life and ministry. Covers biblical authority, hermeneutics, Old and New Testament survey, and the theology of discipleship.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#1B3A6B,#0d2245)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">01</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">Biblical Foundations</div>
+            <div class="phase-hdr-sub">The Word, the World, and the Believer · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">Establish a solid scriptural foundation for Christian life and ministry — biblical authority, hermeneutics, Old and New Testament survey, and the theology of discipleship.</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase01" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 01 in Training Portal →</a>
+        <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank" rel="noopener" class="pl-btn">▶️ YouTube Channel</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Ministry Podcast</a>
+        <a href="https://www.youtube.com/@denisesinspirationalmelodi6408" target="_blank" rel="noopener" class="pl-btn">🎵 Denise's Inspirational Melodies</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">What Is the Word of God?</div>
+          <div class="unit-sr">2 Timothy 3:16-17 NKJV</div>
+          <div class="unit-sv">"All Scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The Bible as the inspired, inerrant Word of God</div>
+            <div class="unit-kp-item">Why Scripture is sufficient for life and ministry</div>
+            <div class="unit-kp-item">How to study the Bible for yourself</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">Hermeneutics: How to Read Scripture</div>
+          <div class="unit-sr">2 Timothy 2:15 NKJV</div>
+          <div class="unit-sv">"Be diligent to present yourself approved to God, a worker who does not need to be ashamed, rightly dividing the word of truth."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Context is everything: historical, cultural, literary</div>
+            <div class="unit-kp-item">Literal vs. figurative language in Scripture</div>
+            <div class="unit-kp-item">Applying the Word to contemporary situations</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">Old Testament Survey</div>
+          <div class="unit-sr">Luke 24:27 NKJV</div>
+          <div class="unit-sv">"Beginning at Moses and all the Prophets, He expounded to them in all the Scriptures the things concerning Himself."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Creation, Fall, and the first covenant</div>
+            <div class="unit-kp-item">The Law, the Prophets, and the Writings</div>
+            <div class="unit-kp-item">How the Old Testament points to Christ</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">New Testament Survey</div>
+          <div class="unit-sr">John 1:14 NKJV</div>
+          <div class="unit-sv">"And the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The four Gospels: four witnesses to one Lord</div>
+            <div class="unit-kp-item">Acts: the Church is born and spreads</div>
+            <div class="unit-kp-item">The Epistles and the book of Revelation</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Theology of Discipleship</div>
+          <div class="unit-sr">Matthew 28:19-20 NKJV</div>
+          <div class="unit-sv">"Go therefore and make disciples of all the nations, teaching them to observe all things that I have commanded you."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What a disciple is and how one is made</div>
+            <div class="unit-kp-item">The role of community in spiritual formation</div>
+            <div class="unit-kp-item">Practical discipleship tools for ministry</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Living the Word: Faith in Daily Life</div>
+          <div class="unit-sr">James 1:22 NKJV</div>
+          <div class="unit-sv">"But be doers of the word, and not hearers only, deceiving yourselves."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Moving from information to transformation</div>
+            <div class="unit-kp-item">Spiritual disciplines: prayer, fasting, Scripture memory</div>
+            <div class="unit-kp-item">How to share your faith with others</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">📖</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Book I Connection</div>
+          <div class="pcl-desc"><strong>Praying to Know Him</strong> (Denise Ford-Walker) — Unit 1's foundation in Scripture leads directly into the 8-chapter prayer curriculum. Go deeper into the prayer life that makes discipleship possible.</div>
+        </div>
+        <a href="#books" class="pcl-btn">Go to Book I →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 02 — THE VACUUM EFFECT
+═══════════════════════════════════════════════════════ -->
+<div id="phase02">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 02 of 06</div>
+    <div class="section-title">The Vacuum Effect</div>
+    <p class="section-desc">Based on Thomas E. Walker's book. Examines what fills the spiritual vacuum when God is removed from individuals, families, and communities.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#2E5FA3,#1a3a6e)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">02</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">The Vacuum Effect</div>
+            <div class="phase-hdr-sub">Surviving the Shift When It Happens · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">What happens when God is displaced from a life, a family, or a community? Something always fills the void. Walker traces the vacuum principle from Scripture through lived experience to restoration.</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase02" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 02 in Training Portal →</a>
+        <a href="https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF" target="_blank" rel="noopener" class="pl-btn">▶️ Full YouTube Playlist</a>
+        <a href="https://music.amazon.com/podcasts/d0784891-6181-48c6-a97b-55f2fa75f653" target="_blank" rel="noopener" class="pl-btn">🎵 Amazon Music Audiobook</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Podcast</a>
+        <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank" rel="noopener" class="pl-btn">📖 Buy the Book</a>
+        <a href="https://www.tiktok.com/@thomaswalker41011" target="_blank" rel="noopener" class="pl-btn">📱 TikTok Shorts</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">What Is the Vacuum Effect?</div>
+          <div class="unit-sr">Matthew 12:43-45 NKJV</div>
+          <div class="unit-sv">"When an unclean spirit goes out of a man... the last state of that man is worse than the first."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Understanding the spiritual vacuum principle</div>
+            <div class="unit-kp-item">How vacuums form in individuals, families, and communities</div>
+            <div class="unit-kp-item">What Jesus says about empty spiritual houses</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">The Vacuum of the Family</div>
+          <div class="unit-sr">Proverbs 22:6 NKJV</div>
+          <div class="unit-sv">"Train up a child in the way he should go, and when he is old he will not depart from it."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">God's design for the family</div>
+            <div class="unit-kp-item">How the vacuum enters through generational sin</div>
+            <div class="unit-kp-item">Restoring the family altar</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">The Vacuum of Love</div>
+          <div class="unit-sr">1 John 4:8 NKJV</div>
+          <div class="unit-sv">"He who does not love does not know God, for God is love."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What happens when God's love is absent from childhood</div>
+            <div class="unit-kp-item">Emotional wounds and irrational behavior</div>
+            <div class="unit-kp-item">Healing the vacuum of love through Christ</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">The Vacuum of Community</div>
+          <div class="unit-sr">Hebrews 10:25 NKJV</div>
+          <div class="unit-sv">"Not forsaking the assembling of ourselves together, as is the manner of some, but exhorting one another."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">God's design for community and fellowship</div>
+            <div class="unit-kp-item">How the enemy uses isolation as a weapon</div>
+            <div class="unit-kp-item">Rebuilding community as a spiritual discipline</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Surviving the Shift</div>
+          <div class="unit-sr">Romans 8:28 NKJV</div>
+          <div class="unit-sv">"And we know that all things work together for good to those who love God, to those who are the called according to His purpose."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What the shift looks like in real life</div>
+            <div class="unit-kp-item">How to prepare spiritually for the shift</div>
+            <div class="unit-kp-item">Finding God's purpose in the midst of crisis</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Closing the Vacuum: Restoration</div>
+          <div class="unit-sr">Joel 2:25 NKJV</div>
+          <div class="unit-sv">"So I will restore to you the years that the swarming locust has eaten."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">God's promise of restoration</div>
+            <div class="unit-kp-item">Practical steps to closing the vacuum in your life</div>
+            <div class="unit-kp-item">Helping others survive and overcome their vacuum effect</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">📖</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Book II Connection</div>
+          <div class="pcl-desc"><strong>Holding On When It Is Destined to Be Yours</strong> (Denise Ford-Walker) — After the vacuum, comes the holding on. The 8-chapter curriculum directly follows the restoration unit, teaching persevering faith after loss.</div>
+        </div>
+        <a href="#books" class="pcl-btn">Go to Book II →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 03 — INTEGRATED CHRISTIAN COUNSELING
+═══════════════════════════════════════════════════════ -->
+<div id="phase03">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 03 of 06</div>
+    <div class="section-title">Integrated Christian Counseling</div>
+    <p class="section-desc">A professional-grade certificate program uniting evidence-based therapeutic practice with biblical principles, spiritual formation, and whole-person care.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#B8860B,#7a5800)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">03</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">Integrated Christian Counseling</div>
+            <div class="phase-hdr-sub">Theology, Psychology, and the Counseling Call · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">Where psychology, theology, and spiritual formation meet in clinical practice. Training for counselors, ministers, and caregivers who are called to whole-person ministry.</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase03" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 03 in Training Portal →</a>
+        <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank" rel="noopener" class="pl-btn">▶️ YouTube Teaching Videos</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Ministry Podcast</a>
+        <a href="https://caps.net/" target="_blank" rel="noopener" class="pl-btn">📄 CAPS Professional Association</a>
+        <a href="https://jfic.researchcommons.org/" target="_blank" rel="noopener" class="pl-btn">📄 JFIC Open-Access Journal</a>
+        <a href="https://www.ccef.org" target="_blank" rel="noopener" class="pl-btn">📄 CCEF Resources</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">Foundations of Integrated Christian Counseling</div>
+          <div class="unit-sr">Philippians 4:7 NKJV</div>
+          <div class="unit-sv">"The peace of God, which surpasses all understanding, will guard your hearts and minds through Christ Jesus."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What integration means: theology + psychology</div>
+            <div class="unit-kp-item">Imago Dei as the foundation for therapeutic dignity</div>
+            <div class="unit-kp-item">The Bio-Psycho-Social-Spiritual (BPSS) model</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">Psychological Theory Through a Biblical Lens</div>
+          <div class="unit-sr">Romans 12:2 NKJV</div>
+          <div class="unit-sv">"Do not be conformed to this world, but be transformed by the renewing of your mind."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">CBT and Romans 12:2 — renewing the mind</div>
+            <div class="unit-kp-item">Attachment theory and God as secure base</div>
+            <div class="unit-kp-item">Narrative therapy and the redemptive story</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">Spiritual Formation and the Therapeutic Process</div>
+          <div class="unit-sr">John 14:26 NKJV</div>
+          <div class="unit-sv">"The Helper, the Holy Spirit, whom the Father will send in My name, He will teach you all things."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Spiritual assessment: FICA, HOPE, and RCOPE tools</div>
+            <div class="unit-kp-item">Using prayer in session: ethics and technique</div>
+            <div class="unit-kp-item">Spiritual disciplines as therapeutic interventions</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">Trauma, Grief, and Redemptive Suffering</div>
+          <div class="unit-sr">2 Corinthians 1:4 NKJV</div>
+          <div class="unit-sv">"Who comforts us in all our tribulation, that we may be able to comfort those who are in any trouble."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Trauma-informed care and the theology of suffering</div>
+            <div class="unit-kp-item">Lament as a clinical and spiritual practice</div>
+            <div class="unit-kp-item">Post-traumatic growth and sanctification</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Specialized Populations and Cultural Competency</div>
+          <div class="unit-sr">Matthew 22:39 NKJV</div>
+          <div class="unit-sv">"You shall love your neighbor as yourself."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Marriage counseling from a covenant perspective</div>
+            <div class="unit-kp-item">Counseling children and adolescents in faith contexts</div>
+            <div class="unit-kp-item">Cultural humility and the global Church</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Capstone: Your Personal Integration Statement</div>
+          <div class="unit-sr">Proverbs 4:23 NKJV</div>
+          <div class="unit-sv">"Keep your heart with all diligence, for out of it spring the issues of life."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">How to write a personal philosophy of counseling</div>
+            <div class="unit-kp-item">Synthesizing theology, psychology, and personal calling</div>
+            <div class="unit-kp-item">Presenting your integration statement to peers</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">📗</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Book III Connection</div>
+          <div class="pcl-desc"><strong>Psychology, Theology &amp; Spirituality in Christian Counseling</strong> (McMinn) — The professional textbook for Phase 03. The 6-chapter curriculum goes chapter-by-chapter through McMinn's integration model, prayer, Scripture, confession, forgiveness, and redemption.</div>
+        </div>
+        <a href="#books" class="pcl-btn">Go to Book III →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 04 — NOW IS THE TIME TO BELIEVE
+═══════════════════════════════════════════════════════ -->
+<div id="phase04">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 04 of 06</div>
+    <div class="section-title">Now Is the Time to Believe</div>
+    <p class="section-desc">An eschatological and evangelistic training on the urgency of the Gospel, with practical tools for personal witness and community engagement.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#1B5E20,#0a3a0f)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">04</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">Now Is the Time to Believe</div>
+            <div class="phase-hdr-sub">Faith, Urgency, and the Prophetic Hour · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">We are living in a prophetic hour. Walker's urgent call to active, mountain-moving faith — and the practical tools to share it with a generation that is walking away.</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase04" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 04 in Training Portal →</a>
+        <a href="https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_" target="_blank" rel="noopener" class="pl-btn">▶️ Full YouTube Playlist</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Podcast</a>
+        <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank" rel="noopener" class="pl-btn">📖 Thomas Walker — Amazon Books</a>
+        <a href="https://www.tiktok.com/@thomaswalker41011" target="_blank" rel="noopener" class="pl-btn">📱 TikTok</a>
+        <a href="https://www.youtube.com/@walkingwithdenisefordwalker" target="_blank" rel="noopener" class="pl-btn">▶️ Walking with Denise</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">The Urgency of the Hour</div>
+          <div class="unit-sr">Romans 13:11 NKJV</div>
+          <div class="unit-sv">"Now it is high time to awake out of sleep; for now our salvation is nearer than when we first believed."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Biblical signs of the times and their relevance today</div>
+            <div class="unit-kp-item">Why NOW is the time to believe and act</div>
+            <div class="unit-kp-item">The cost of spiritual sleep in a desperate hour</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">Faith That Moves Mountains</div>
+          <div class="unit-sr">Mark 11:23 NKJV</div>
+          <div class="unit-sv">"Whoever says to this mountain, Be removed and be cast into the sea, and does not doubt in his heart... he will have whatever he says."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What biblical faith actually is</div>
+            <div class="unit-kp-item">The role of confession and declaration</div>
+            <div class="unit-kp-item">How to build faith in the face of impossible circumstances</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">Evangelism: Sharing the Good News Today</div>
+          <div class="unit-sr">Romans 10:14 NKJV</div>
+          <div class="unit-sv">"How then shall they call on Him in whom they have not believed? And how shall they believe in Him of whom they have not heard?"</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Your personal testimony as your most powerful tool</div>
+            <div class="unit-kp-item">Sharing the Gospel with Gen X, Millennials, and Gen Z</div>
+            <div class="unit-kp-item">Digital evangelism: YouTube, social media, podcasting</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">Prayer and Intercession in the Last Days</div>
+          <div class="unit-sr">1 Thessalonians 5:17 NKJV</div>
+          <div class="unit-sv">"Pray without ceasing."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Types of prayer: petition, intercession, spiritual warfare</div>
+            <div class="unit-kp-item">Building a personal prayer discipline</div>
+            <div class="unit-kp-item">Corporate prayer and its role in community transformation</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Community Outreach and Social Justice</div>
+          <div class="unit-sr">Isaiah 58:6-7 NKJV</div>
+          <div class="unit-sv">"Is this not the fast that I have chosen: to loose the bonds of wickedness, to undo the heavy burdens, to share your bread with the hungry?"</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The biblical mandate for social justice and outreach</div>
+            <div class="unit-kp-item">Building a community outreach ministry from scratch</div>
+            <div class="unit-kp-item">How Reflections of Grace models ministry without walls</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Living as a Witness Every Day</div>
+          <div class="unit-sr">Acts 1:8 NKJV</div>
+          <div class="unit-sv">"You shall receive power when the Holy Spirit has come upon you; and you shall be witnesses to Me in Jerusalem, and in all Judea and Samaria, and to the end of the earth."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">How to be a witness in family, workplace, and community</div>
+            <div class="unit-kp-item">The power of the Holy Spirit for daily witness</div>
+            <div class="unit-kp-item">Building a lifestyle of faith-in-action</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">📖</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Book II Connection</div>
+          <div class="pcl-desc"><strong>Holding On When It Is Destined to Be Yours</strong> (Denise Ford-Walker) — The faith curriculum for this phase. 8 chapters on persevering belief, from the promise through opposition to the moment of receiving.</div>
+        </div>
+        <a href="#books" class="pcl-btn">Go to Book II →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 05 — IT SHOULDN'T BE IN THE CHURCH
+═══════════════════════════════════════════════════════ -->
+<div id="phase05">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 05 of 06</div>
+    <div class="section-title">It Shouldn't Be in the Church</div>
+    <p class="section-desc">A courageous look at sins, compromise, and principalities that have infiltrated the modern church — and a call to holiness, accountability, and redemptive community.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#7B1A1A,#4a0f0f)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">05</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">It Shouldn't Be in the Church</div>
+            <div class="phase-hdr-sub">The Saga Continues · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">Honest diagnosis before healing can begin. Walker names what has crept into the modern Church — and issues a prophetic call back to holiness, accountability, and the Body of Christ God intended.</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase05" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 05 in Training Portal →</a>
+        <a href="https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_" target="_blank" rel="noopener" class="pl-btn">▶️ Full YouTube Playlist</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Podcast</a>
+        <a href="https://www.youtube.com/@denisesinspirationalmelodi6408" target="_blank" rel="noopener" class="pl-btn">🎵 Denise's Inspirational Melodies</a>
+        <a href="https://www.youtube.com/@walkingwithdenisefordwalker" target="_blank" rel="noopener" class="pl-btn">▶️ Walking with Denise</a>
+        <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank" rel="noopener" class="pl-btn">📖 Buy the Book</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">What Has Crept In?</div>
+          <div class="unit-sr">Jude 1:4 NKJV</div>
+          <div class="unit-sv">"Certain men have crept in unnoticed, who long ago were marked out for this condemnation, ungodly men, who turn the grace of our God into lewdness."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The history of corruption in the institutional Church</div>
+            <div class="unit-kp-item">False teaching, prosperity gospel, and spiritual abuse</div>
+            <div class="unit-kp-item">Why honest diagnosis is the first step to healing</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">Spiritual Abuse and Its Aftermath</div>
+          <div class="unit-sr">Ezekiel 34:2 NKJV</div>
+          <div class="unit-sv">"Woe to the shepherds of Israel who feed themselves! Should not the shepherds feed the flocks?"</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What spiritual abuse is and how to identify it</div>
+            <div class="unit-kp-item">The Shepherding Movement and historical examples</div>
+            <div class="unit-kp-item">How the Church can create safe communities</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">Sexual Sin in the Church</div>
+          <div class="unit-sr">1 Corinthians 6:18 NKJV</div>
+          <div class="unit-sv">"Flee sexual immorality... your body is the temple of the Holy Spirit who is in you."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Why sexual sin is a special category (1 Cor 6:18)</div>
+            <div class="unit-kp-item">The pastoral and clinical response to sexual sin</div>
+            <div class="unit-kp-item">Accountability structures that actually work</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">Money, Mammon, and the Prosperity Gospel</div>
+          <div class="unit-sr">Matthew 6:24 NKJV</div>
+          <div class="unit-sv">"No one can serve two masters... You cannot serve God and mammon."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What the prosperity gospel teaches and why it is wrong</div>
+            <div class="unit-kp-item">How Mammon enters the Church through greed</div>
+            <div class="unit-kp-item">A biblical theology of money, giving, and contentment</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Racism and Division in the Body of Christ</div>
+          <div class="unit-sr">Galatians 3:28 NKJV</div>
+          <div class="unit-sv">"There is neither Jew nor Greek, there is neither slave nor free... for you are all one in Christ Jesus."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The history of race and the American Church</div>
+            <div class="unit-kp-item">What reconciliation actually requires</div>
+            <div class="unit-kp-item">How integrated ministries model the Kingdom of God</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Restoring the Church: A Call to Holiness</div>
+          <div class="unit-sr">1 Peter 4:17 NKJV</div>
+          <div class="unit-sv">"For the time has come for judgment to begin at the house of God."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">What genuine Church reform looks like</div>
+            <div class="unit-kp-item">How individuals can pursue holiness in an impure Church</div>
+            <div class="unit-kp-item">The prophetic call to be the Church God intended</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">📗</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Book III Connection</div>
+          <div class="pcl-desc"><strong>Psychology, Theology &amp; Spirituality in Christian Counseling</strong> (McMinn) — Phase 05's spiritual abuse and trauma units connect directly to McMinn's chapters on confession, forgiveness, and redemption in counseling — tools for healing church-hurt.</div>
+        </div>
+        <a href="#books" class="pcl-btn">Go to Book III →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     PHASE 06 — GENERATION X LEFT THE CHURCH
+═══════════════════════════════════════════════════════ -->
+<div id="phase06">
+  <div class="section-head">
+    <div class="section-eyebrow">Phase 06 of 06</div>
+    <div class="section-title">Generation X Left the Church</div>
+    <p class="section-desc">Based on Thomas E. Walker's 2025 manuscript. How Gen X's departure created a cascading spiritual crisis — and what it means for Millennials, Gen Z, and Alpha.</p>
+  </div>
+  <div class="phases-wrap" style="padding-top:0">
+    <div class="phase-block">
+      <div class="phase-hdr" style="background:linear-gradient(135deg,#4A148C,#2a0a5e)">
+        <div class="phase-hdr-top">
+          <div class="phase-num-badge">06</div>
+          <div class="phase-hdr-info">
+            <div class="phase-hdr-title">Generation X Left the Church</div>
+            <div class="phase-hdr-sub">Now All Hell Broke Loose · 6 Units</div>
+          </div>
+        </div>
+        <div class="phase-hdr-desc">Walker's most prophetic work: how the departure of the last generation connected to the old-time way set loose a cascading spiritual crisis — and what we must do about it now. ISBN: 978-0-9830162-8-1</div>
+      </div>
+      <div class="phase-links">
+        <a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/phase06" target="_blank" class="pl-btn pl-btn-primary">▶ Open Phase 06 in Training Portal →</a>
+        <a href="https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb" target="_blank" rel="noopener" class="pl-btn">🎧 FREE Audiobook — ElevenReader</a>
+        <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank" rel="noopener" class="pl-btn">▶️ YouTube Channel</a>
+        <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank" rel="noopener" class="pl-btn">📖 Buy the Book — Amazon</a>
+        <a href="https://www.tiktok.com/@thomaswalker41011" target="_blank" rel="noopener" class="pl-btn">📱 TikTok — @thomaswalker41011</a>
+        <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="pl-btn">🎵 Spotify Podcast</a>
+      </div>
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-num">Unit 1</div>
+          <div class="unit-title">The Forgotten Generation: Who Is Gen X?</div>
+          <div class="unit-sr">Psalm 46:1 NKJV</div>
+          <div class="unit-sv">"God is our refuge and strength, an ever-present help in trouble."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Gen X demographics and defining formative events</div>
+            <div class="unit-kp-item">The Civil Rights Movement, AFDC policies, and the Black family</div>
+            <div class="unit-kp-item">The Jesus Movement and Gen X's early encounters with faith</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 2</div>
+          <div class="unit-title">The Shifting: Social Forces and Church Abuse</div>
+          <div class="unit-sr">1 Timothy 4:1 NKJV</div>
+          <div class="unit-sv">"In latter times some will depart from the faith, giving heed to deceiving spirits and doctrines of demons."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">The Shepherding Movement: spiritual abuse at scale</div>
+            <div class="unit-kp-item">The AIDS epidemic and the Church's failures</div>
+            <div class="unit-kp-item">Gen X as the last traditionally religious generation</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 3</div>
+          <div class="unit-title">Spirits Turned Loose: Principalities and Pop Culture</div>
+          <div class="unit-sr">Ephesians 6:12 NKJV</div>
+          <div class="unit-sv">"We do not wrestle against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this age."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Principalities that colonized Gen X culture</div>
+            <div class="unit-kp-item">Horror, Hip-Hop, Heavy Metal, and the Internet as vectors</div>
+            <div class="unit-kp-item">New Age, Kemet, and Witchcraft filling the spiritual void</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 4</div>
+          <div class="unit-title">Severed Roots: How Gen X Shaped the Next Generations</div>
+          <div class="unit-sr">Judges 2:10 NKJV</div>
+          <div class="unit-sv">"Another generation arose after them who did not know the LORD nor the work which He had done for Israel."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Judges 2:10 as the biblical template for Gen X's impact</div>
+            <div class="unit-kp-item">Pew Research 2023: the rise of the religious nones</div>
+            <div class="unit-kp-item">How deconstruction on TikTok replaced Sunday school</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 5</div>
+          <div class="unit-title">Pastoral Wound Care: Counseling the Church-Hurt</div>
+          <div class="unit-sr">John 14:26 NKJV</div>
+          <div class="unit-sv">"The Helper, the Holy Spirit, whom the Father will send in My name, He will teach you all things."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Religious Trauma Syndrome: clinical presentation and response</div>
+            <div class="unit-kp-item">Agape Love as the reparative framework for God-image wounds</div>
+            <div class="unit-kp-item">Counseling a Gen X spiritual-but-not-religious client</div>
+          </div>
+        </div>
+        <div class="unit-card">
+          <div class="unit-num">Unit 6</div>
+          <div class="unit-title">Restoring the Old-Time Way: A Response Plan</div>
+          <div class="unit-sr">Jeremiah 29:13 NKJV</div>
+          <div class="unit-sv">"And you will seek Me and find Me, when you search for Me with all your heart."</div>
+          <div class="unit-kp">
+            <div class="unit-kp-item">Designing ministry that reaches the spiritually wounded</div>
+            <div class="unit-kp-item">The Great Commission and Great Commandment as dual mandate</div>
+            <div class="unit-kp-item">What restoring the old-time way means for 21st-century ministry</div>
+          </div>
+        </div>
+      </div>
+      <div class="phase-curriculum-link">
+        <div class="pcl-icon">🎧</div>
+        <div class="pcl-text">
+          <div class="pcl-label">Free Audiobook Available</div>
+          <div class="pcl-desc"><strong>Generation X Left the Church, Now All Hell Broke Loose</strong> — Listen to the full audiobook free on ElevenReader while working through Phase 06. Thomas E. Walker narrates.</div>
+        </div>
+        <a href="https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb" target="_blank" rel="noopener" class="pcl-btn">Listen Free →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider"/>
+
+<!-- ══════════════════════════════════════════════════════
+     ALL LINKS — GLOBAL PLATFORM INDEX
+═══════════════════════════════════════════════════════ -->
+<div id="alllinks">
+  <div class="section-head">
+    <div class="section-eyebrow">🔗 Complete Link Directory</div>
+    <div class="section-title">Every Platform, Every Channel</div>
+    <p class="section-desc">Every external link for Reflections of Grace Outreach Ministries — YouTube channels, Spotify, Amazon, TikTok, audiobooks, journals, and the training portals — all in one place.</p>
+  </div>
+  <div class="global-links">
+    <div class="gl-grid">
+
+      <!-- Training Portals -->
+      <div class="gl-card">
+        <div class="gl-icon">🖥️</div>
+        <div class="gl-info">
+          <div class="gl-name">Training Portal</div>
+          <div class="gl-meta">Six-phase Bible study portal — all lessons, videos, and audiobook</div>
+          <a href="https://reflectionsofgracebiblestudies.netlify.app/" target="_blank" rel="noopener" class="gl-link">Open Portal →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🏛️</div>
+        <div class="gl-info">
+          <div class="gl-name">Ministry Portal</div>
+          <div class="gl-meta">Reflections of Grace Ministry home page</div>
+          <a href="https://reflectionsofgraceministryportal.netlify.app/" target="_blank" rel="noopener" class="gl-link">Open Portal →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🌐</div>
+        <div class="gl-info">
+          <div class="gl-name">Ministry Website</div>
+          <div class="gl-meta">reflectionsofgraceoutreachministries.org</div>
+          <a href="https://reflectionsofgraceoutreachministries.org/" target="_blank" rel="noopener" class="gl-link">Visit →</a>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="gl-card">
+        <div class="gl-icon">▶️</div>
+        <div class="gl-info">
+          <div class="gl-name">Reflections of Grace — YouTube</div>
+          <div class="gl-meta">Main teaching channel · Thomas E. Walker, MDiv.</div>
+          <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank" rel="noopener" class="gl-link">Watch →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🎵</div>
+        <div class="gl-info">
+          <div class="gl-name">Denise's Inspirational Melodies — YouTube</div>
+          <div class="gl-meta">Worship and encouragement from Co-Founder Denise Ford-Walker</div>
+          <a href="https://www.youtube.com/@denisesinspirationalmelodi6408" target="_blank" rel="noopener" class="gl-link">Watch →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🚶</div>
+        <div class="gl-info">
+          <div class="gl-name">Walking with Denise Ford-Walker — YouTube</div>
+          <div class="gl-meta">Devotional teaching and life encouragement</div>
+          <a href="https://www.youtube.com/@walkingwithdenisefordwalker" target="_blank" rel="noopener" class="gl-link">Watch →</a>
+        </div>
+      </div>
+
+      <!-- Playlists -->
+      <div class="gl-card">
+        <div class="gl-icon">📋</div>
+        <div class="gl-info">
+          <div class="gl-name">The Vacuum Effect — Full YouTube Playlist</div>
+          <div class="gl-meta">Phase 02 complete video teaching series</div>
+          <a href="https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF" target="_blank" rel="noopener" class="gl-link">Watch All →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📋</div>
+        <div class="gl-info">
+          <div class="gl-name">Now Is the Time — Full YouTube Playlist</div>
+          <div class="gl-meta">Phases 04 &amp; 05 complete video teaching series</div>
+          <a href="https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_" target="_blank" rel="noopener" class="gl-link">Watch All →</a>
+        </div>
+      </div>
+
+      <!-- Audiobook -->
+      <div class="gl-card">
+        <div class="gl-icon">🎧</div>
+        <div class="gl-info">
+          <div class="gl-name">Generation X Left the Church — Free Audiobook</div>
+          <div class="gl-meta">Listen free on ElevenReader · Narrated by Thomas E. Walker</div>
+          <a href="https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb" target="_blank" rel="noopener" class="gl-link">Listen Free →</a>
+        </div>
+      </div>
+
+      <!-- Spotify -->
+      <div class="gl-card">
+        <div class="gl-icon">🎵</div>
+        <div class="gl-info">
+          <div class="gl-name">Reflections of Grace Ministry — Spotify</div>
+          <div class="gl-meta">Ministry teaching podcast and devotional content</div>
+          <a href="https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA" target="_blank" rel="noopener" class="gl-link">Listen →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🎵</div>
+        <div class="gl-info">
+          <div class="gl-name">Denise Ford-Walker — Spotify</div>
+          <div class="gl-meta">Inspirational melodies and worship music</div>
+          <a href="https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf" target="_blank" rel="noopener" class="gl-link">Listen →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🎵</div>
+        <div class="gl-info">
+          <div class="gl-name">The Vacuum Effect — Amazon Music</div>
+          <div class="gl-meta">Audiobook &amp; podcast on Amazon Music</div>
+          <a href="https://music.amazon.com/podcasts/d0784891-6181-48c6-a97b-55f2fa75f653" target="_blank" rel="noopener" class="gl-link">Listen →</a>
+        </div>
+      </div>
+
+      <!-- Amazon Books -->
+      <div class="gl-card">
+        <div class="gl-icon">📖</div>
+        <div class="gl-info">
+          <div class="gl-name">Thomas E. Walker — Amazon Author Page</div>
+          <div class="gl-meta">All books by Thomas E. Walker — The Vacuum Effect, Now Is the Time, It Shouldn't Be in the Church, Generation X Left the Church</div>
+          <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank" rel="noopener" class="gl-link">Shop Books →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📖</div>
+        <div class="gl-info">
+          <div class="gl-name">Denise Ford-Walker — Amazon Author Page</div>
+          <div class="gl-meta">Books by Denise Ford-Walker — Praying to Know Him, Holding On When It Is Destined to Be Yours</div>
+          <a href="https://www.amazon.com/Denise-P.-Ford/e/B08WQ7PY8N" target="_blank" rel="noopener" class="gl-link">Shop Books →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🌐</div>
+        <div class="gl-info">
+          <div class="gl-name">Thomas E. Walker Books Website</div>
+          <div class="gl-meta">Official book site — thomasewalkerbooks.com</div>
+          <a href="https://www.thomasewalkerbooks.com/books" target="_blank" rel="noopener" class="gl-link">Visit →</a>
+        </div>
+      </div>
+
+      <!-- Social & Blog -->
+      <div class="gl-card">
+        <div class="gl-icon">📱</div>
+        <div class="gl-info">
+          <div class="gl-name">TikTok — @thomaswalker41011</div>
+          <div class="gl-meta">Short-form prophetic and teaching content from Thomas Walker</div>
+          <a href="https://www.tiktok.com/@thomaswalker41011" target="_blank" rel="noopener" class="gl-link">Follow →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">✍️</div>
+        <div class="gl-info">
+          <div class="gl-name">Denise's Inspirational Melodies — Blog</div>
+          <div class="gl-meta">denisesinspirationalmelodies.blogspot.com</div>
+          <a href="https://denisesinspirationalmelodies.blogspot.com" target="_blank" rel="noopener" class="gl-link">Read →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">🌐</div>
+        <div class="gl-info">
+          <div class="gl-name">Denise Ford-Walker — Personal Website</div>
+          <div class="gl-meta">denisesinspirationalmelodies.com</div>
+          <a href="https://denisesinspirationalmelodies.com" target="_blank" rel="noopener" class="gl-link">Visit →</a>
+        </div>
+      </div>
+
+      <!-- Academic Resources -->
+      <div class="gl-card">
+        <div class="gl-icon">📄</div>
+        <div class="gl-info">
+          <div class="gl-name">Journal of Psychology &amp; Theology</div>
+          <div class="gl-meta">Sage Publications — primary peer-reviewed integration journal</div>
+          <a href="https://journals.sagepub.com/home/ptj" target="_blank" rel="noopener" class="gl-link">Access →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📄</div>
+        <div class="gl-info">
+          <div class="gl-name">JFIC — Open Access Counseling Journal</div>
+          <div class="gl-meta">Journal of Faith Integration in Counseling — free full access</div>
+          <a href="https://jfic.researchcommons.org/" target="_blank" rel="noopener" class="gl-link">Read Free →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📄</div>
+        <div class="gl-info">
+          <div class="gl-name">CCEF — Christian Counseling Resources</div>
+          <div class="gl-meta">Free articles, audio, and Journal of Biblical Counseling</div>
+          <a href="https://www.ccef.org" target="_blank" rel="noopener" class="gl-link">Access Free →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📄</div>
+        <div class="gl-info">
+          <div class="gl-name">Pew Research — Religion &amp; Public Life</div>
+          <div class="gl-meta">Current data on American faith, nones, generational trends</div>
+          <a href="https://www.pewresearch.org/religion/" target="_blank" rel="noopener" class="gl-link">Access →</a>
+        </div>
+      </div>
+      <div class="gl-card">
+        <div class="gl-icon">📄</div>
+        <div class="gl-info">
+          <div class="gl-name">Worthington Forgiveness Research</div>
+          <div class="gl-meta">Everett Worthington — free REACH model resources and papers</div>
+          <a href="https://www.evworthington-forgiveness.com/" target="_blank" rel="noopener" class="gl-link">Access →</a>
+        </div>
+      </div>
+
+      <!-- Enroll / Give -->
+      <div class="gl-card" style="border-color:var(--gold);background:var(--gold-pale)">
+        <div class="gl-icon">✝️</div>
+        <div class="gl-info">
+          <div class="gl-name" style="color:var(--gold)">Enroll Free</div>
+          <div class="gl-meta">Join the training program — completely free</div>
+          <a href="https://reflectionsofgracebiblestudies.netlify.app/#/enroll" target="_blank" rel="noopener" class="gl-link">Enroll Now →</a>
+        </div>
+      </div>
+      <div class="gl-card" style="border-color:var(--green);background:var(--green-lt)">
+        <div class="gl-icon">❤️</div>
+        <div class="gl-info">
+          <div class="gl-name" style="color:var(--green)">Support the Ministry — Give</div>
+          <div class="gl-meta">Voluntary gift of $10 or $50 to support this work</div>
+          <a href="https://reflectionsofgracebiblestudies.netlify.app/#/donate" target="_blank" rel="noopener" class="gl-link">Give Now →</a>
+        </div>
+      </div>
+
+    </div><!-- /gl-grid -->
+  </div><!-- /global-links -->
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-cross">✝</div>
+  <p class="footer-verse">"For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do."</p>
+  <div class="footer-ref">Ephesians 2:10 NIV</div>
+  <div class="footer-links">
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/" target="_blank">Training Portal</a>
+    <a href="https://reflectionsofgraceministryportal.netlify.app/" target="_blank">Ministry Portal</a>
+    <a href="https://reflectionsofgraceoutreachministries.org/" target="_blank">Ministry Website</a>
+    <a href="https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG" target="_blank">Thomas Walker Books</a>
+    <a href="https://www.amazon.com/Denise-P.-Ford/e/B08WQ7PY8N" target="_blank">Denise Ford-Walker Books</a>
+    <a href="mailto:rograceoutreach@gmail.com">rograceoutreach@gmail.com</a>
+  </div>
+  <p class="footer-copy">Reflections of Grace Outreach Ministries, Inc. · 501(c)(3) Nonprofit · Thomas E. Walker, MDiv. &amp; Denise Ford-Walker · Moreno Valley, CA</p>
+</footer>
+
+<script>
+function scrollTo(id){
+  const el=document.getElementById(id);
+  if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+// Sticky jump nav highlight
+const sections=['books','phase01','phase02','phase03','phase04','phase05','phase06','alllinks'];
+const jnItems=document.querySelectorAll('.jn-item');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-120)current=id;
+  });
+  jnItems.forEach((item,i)=>{
+    const ids=['books','phase01','phase02','phase03','phase04','phase05','phase06','alllinks'];
+    item.classList.toggle('active',ids[i]===current);
+  });
+},{ passive:true });
+</script>
+</body>
+</html>
