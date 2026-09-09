@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>ROG Media &amp; Book Resource Library</title>
+<title>ROG Resource Library v2026.09</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+SC:wght@500;600;700&display=swap" rel="stylesheet"/>
@@ -76,7 +76,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 <body>
 
 <nav>
-  <div class="nav-logo">ROG Resource Library<span>Media &amp; Book Curriculum</span></div>
+  <div class="portal-id library" style="flex-shrink:0;margin-right:8px">📚 Library</div><div class="nav-logo">ROG Resource Library<span>Media &amp; Book Curriculum</span></div>
   <div class="nav-links">
     <a href="https://reflectionsofgracebiblestudies.netlify.app" class="home">&#8592; Training Portal</a>
     <a href="https://rog-access-hub.netlify.app" target="_blank">Access Hub</a>
@@ -152,6 +152,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
     </div>
     <div class="lfc">
       <h4>Contact</h4>
+      <a href="https://rog-library.netlify.app" style="display:block;margin-bottom:4px">📚 rog-library.netlify.app</a>
       <a href="mailto:rograceoutreach@gmail.com">rograceoutreach@gmail.com</a>
       <a href="https://www.reflectionsofgraceoutreachministries.org" target="_blank">Ministry Website &#8599;</a>
       <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank">YouTube &#8599;</a>
@@ -160,7 +161,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
   <p class="lfc2">Thomas E. Walker, MDiv. &amp; Denise Ford-Walker &middot; Moreno Valley, CA &middot; 501c3 Nonprofit &middot; All external resources link to their original free publishers.</p>
 </footer>
 
-<script>
+<script>/* ROG Library — https://rog-library.netlify.app */
+
 const PHASE_META={'phase01':{title:'Biblical Foundations',color:'#1B3A6B',num:'01'},'phase02':{title:'The Vacuum Effect',color:'#2E5FA3',num:'02'},'phase03':{title:'Integrated Christian Counseling',color:'#B8860B',num:'03'},'phase04':{title:'Now Is the Time to Believe',color:'#1B5E20',num:'04'},'phase05':{title:'It Should Not Be in the Church',color:'#7B1A1A',num:'05'},'phase06':{title:'Generation X Left the Church',color:'#4A148C',num:'06'},'phase07':{title:'Praying to Know Him',color:'#1B3A6B',num:'07'},'phase08':{title:'Holding On When Destined',color:'#0F5F5F',num:'08'},'phase09':{title:'Psychology, Theology & Spirituality',color:'#7B1A3A',num:'09'},'phase10':{title:'Survey of Romans 1-3',color:'#2C3E6B',num:'10'},'phase11':{title:'Survey of Romans 4-6',color:'#3D2B6B',num:'11'},'phase12':{title:'Servant Leaders in Christ',color:'#1A3A1A',num:'12'},'phase13':{title:'Galatians: Faith, Freedom & Spirit',color:'#6B2A00',num:'13'}};
 const LIBRARY_DATA=[
 {icon:'\\ud83d\\udcc4',title:'The Chicago Statement on Biblical Inerrancy (1978)',type:'Scholarly',tag:'Reference',meta:'The definitive evangelical scholarly statement on Scripture\'s authority',url:'https://www.bible-researcher.com/chicago1.html',phase:'phase01'},
@@ -758,11 +760,54 @@ function card(item){
     +'<div class="lctags">'+badges+'</div>'
     +btn+'</div>';
 }
+
+function renderPhasePanel(){
+  if(_fp==='all') return '';
+  var pm=PHASE_META[_fp]; if(!pm) return '';
+  var tp='https://reflectionsofgracebiblestudies.netlify.app';
+  var hub='https://rog-access-hub.netlify.app';
+  var btn=function(label,href){
+    return '<a href="'+href+'" target="_blank" rel="noopener" '
+      +'style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;'
+      +'background:rgba(201,146,58,.12);border:1px solid rgba(201,146,58,.3);'
+      +'border-radius:8px;font-size:13px;font-weight:600;color:var(--gold-lt);'
+      +'text-decoration:none;font-family:var(--ff-b)">'+label+'</a>';
+  };
+  var isPhase13 = (_fp === 'phase13');
+  var extraBtns = isPhase13
+    ? btn('📜 Research Archive',  tp+'/#/research')
+        + btn('📚 Resource Library', 'https://rog-library.netlify.app')
+    : '';
+
+  return '<div style="background:rgba(253,243,224,.05);border:1px solid rgba(201,146,58,.2);'
+    +'border-radius:12px;padding:20px 22px;margin-bottom:20px;border-left:4px solid '+pm.color+'">'
+    +'<div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px">'
+    +'<div style="width:42px;height:42px;border-radius:50%;background:'+pm.color+';display:flex;'
+    +'align-items:center;justify-content:center;color:#fff;font-family:var(--ff-sc);'
+    +'font-size:13px;font-weight:700;flex-shrink:0">'+pm.num+'</div>'
+    +'<div style="flex:1"><div style="font-family:var(--ff-d);font-size:20px;font-weight:700;'
+    +'color:var(--gold-lt);line-height:1.2">Phase '+pm.num+' — '+pm.title+'</div>'
+    +'<div style="font-size:13px;color:rgba(253,243,224,.55);margin-top:4px">'
+    +(isPhase13 ? '📜 Galatians: Faith, Freedom &amp; Life in the Spirit — Six-Module Research Study' : 'Showing all resources matched to this phase below')
+    +'</div></div></div>'
+    +(isPhase13 ? '<div style="background:rgba(107,42,0,.25);border:1px solid rgba(201,146,58,.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:rgba(201,146,58,.9)">📜 This is the Phase 13 Research Archive — six recorded Bible-study sessions on Galatians with full hermeneutics, discussion, review questions, and life application.</div>' : '')
+    +'<div style="font-family:var(--ff-sc);font-size:10px;letter-spacing:.12em;'
+    +'text-transform:uppercase;color:rgba(201,146,58,.6);margin-bottom:10px">Study This Phase</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:9px">'
+    +btn('📖 Study Guide', tp+'/#/phase/'+_fp)
+    +btn('✏️ Quiz',        tp+'/#/phase/'+_fp+'/unit/0')
+    +btn('💬 Discussion',  tp+'/#/phase/'+_fp+'/unit/0')
+    +btn('🔗 Resources',   tp+'/#/phase/'+_fp)
+    +extraBtns
+    +btn('🌐 Access Hub',  hub)
+    +'</div></div>';
+}
+
 function renderLib(){
   var filtered=LIBRARY_DATA.filter(match);
   document.getElementById('stat-total').textContent=LIBRARY_DATA.length;
   document.getElementById('rc').textContent=filtered.length+' of '+LIBRARY_DATA.length+' resources';
-  document.getElementById('lib-grid').innerHTML=filtered.map(card).join('');
+  document.getElementById('lib-grid').innerHTML=renderPhasePanel()+filtered.map(card).join('');
 }
 function buildPhaseFilters(){
   var row=document.getElementById('phase-filters');
