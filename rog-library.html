@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ROG Resource Library v2026.09</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+SC:wght@500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wine:#0A2A6E;--wine-dk:#041238;--wine-md:#1A4AAE;
+  --gold:#38A8E8;--gold-lt:#7DCCF5;--parchment:#F0F8FF;
+  --ff-d:'EB Garamond',Georgia,serif;
+  --ff-b:'Crimson Text',Georgia,serif;
+  --ff-sc:'Cormorant SC','EB Garamond',Georgia,serif;
+  --nav-h:64px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-b);font-size:16px;background:linear-gradient(160deg,#0A2A6E 0%,#041238 100%);background-attachment:fixed;color:#F0F8FF;min-height:100vh;line-height:1.65}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(4,18,56,.95);backdrop-filter:blur(12px);border-bottom:2px solid #38A8E8;display:flex;align-items:center;padding:0 20px;gap:14px;flex-wrap:nowrap;overflow-x:auto}
+.nav-logo{font-family:var(--ff-d);font-size:17px;font-weight:700;color:var(--gold-lt);white-space:nowrap;flex-shrink:0}
+.nav-logo span{font-size:11px;color:rgba(240,248,255,.5);font-weight:400;display:block;font-family:var(--ff-sc)}
+.nav-links{display:flex;gap:7px;margin-left:auto;flex-shrink:0}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(240,248,255,.75);padding:5px 10px;border-radius:6px;border:1px solid rgba(240,248,255,.18);background:rgba(240,248,255,.06);white-space:nowrap}
+.nav-links a.home{background:#38A8E8;color:#041238;border-color:var(--gold)}
+.hero{padding:calc(var(--nav-h) + 48px) 24px 40px;max-width:860px;margin:0 auto;text-align:center}
+.hero-eyebrow{font-family:var(--ff-sc);font-size:12px;letter-spacing:.15em;color:var(--gold);margin-bottom:14px}
+.hero h1{font-family:var(--ff-d);font-size:clamp(30px,6vw,54px);font-weight:800;line-height:1.1;color:var(--gold-lt);margin-bottom:14px}
+.hero p{font-size:17px;color:rgba(240,248,255,.72);max-width:660px;margin:0 auto 24px;line-height:1.75}
+.hero-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px}
+.hs-n{font-family:var(--ff-d);font-size:36px;font-weight:700;color:var(--gold-lt);line-height:1}
+.hs-l{font-family:var(--ff-sc);font-size:10px;letter-spacing:.12em;color:rgba(240,248,255,.4);margin-top:3px}
+.portal-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.portal-btn{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:var(--ff-b);border:1px solid;cursor:pointer}
+.portal-btn.primary{background:#38A8E8;color:#041238;border-color:var(--gold)}
+.portal-btn.outline{background:rgba(240,248,255,.07);color:rgba(240,248,255,.85);border-color:rgba(240,248,255,.2)}
+.filter-bar{position:sticky;top:var(--nav-h);z-index:100;background:rgba(4,18,56,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(56,168,232,.2);padding:12px 20px}
+.search-wrap{max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+#lib-search{width:100%;padding:10px 16px;background:rgba(240,248,255,.08);border:1px solid rgba(240,248,255,.22);border-radius:8px;color:#F0F8FF;font-family:var(--ff-b);font-size:16px;outline:none}
+#lib-search:focus{border-color:var(--gold)}
+#lib-search::placeholder{color:rgba(240,248,255,.3)}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fl{font-family:var(--ff-sc);font-size:10px;letter-spacing:.1em;color:rgba(240,248,255,.3);margin-right:3px}
+.fb{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid rgba(240,248,255,.22);background:rgba(240,248,255,.06);color:rgba(240,248,255,.65);font-family:var(--ff-b);transition:all .2s}
+.fb.active{background:#38A8E8;color:#041238;border-color:var(--gold)}
+.pc{padding:4px 9px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;border:1.5px solid;font-family:var(--ff-sc);letter-spacing:.04em;transition:all .15s;white-space:nowrap}
+.pc:hover,.pc.active{filter:brightness(1.25);transform:scale(1.04)}
+.lib-wrap{max-width:1200px;margin:0 auto;padding:24px 18px 80px}
+.rc{font-family:var(--ff-sc);font-size:11px;color:rgba(240,248,255,.35);letter-spacing:.07em;margin-bottom:16px}
+.lib-grid{columns:320px 3;gap:14px}
+.lib-card{break-inside:avoid;background:rgba(240,248,255,.06);border:1px solid rgba(253,243,224,.1);border-radius:10px;padding:16px 16px 13px;margin-bottom:14px;display:flex;flex-direction:column;gap:9px;transition:transform .2s,border-color .2s,background .2s}
+.lib-card:hover{transform:translateY(-2px);border-color:rgba(56,168,232,.35);background:rgba(240,248,255,.09)}
+.lct{display:flex;align-items:flex-start;gap:11px}
+.lci{font-size:20px;flex-shrink:0;margin-top:2px}
+.lcti{font-family:var(--ff-d);font-size:14px;font-weight:600;color:rgba(240,248,255,.92);line-height:1.4;flex:1}
+.lcm{font-size:12px;color:rgba(240,248,255,.5);line-height:1.5}
+.lctags{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.ltb{padding:2px 8px;border-radius:3px;font-size:9px;font-weight:700;font-family:var(--ff-sc);letter-spacing:.07em;background:rgba(56,168,232,.15);color:var(--gold-lt);border:1px solid rgba(56,168,232,.22)}
+.lpb{padding:2px 7px;border-radius:20px;font-size:9px;font-weight:700;font-family:var(--ff-sc);border:1px solid;cursor:pointer;transition:opacity .2s}
+.lpb:hover{opacity:1!important;transform:scale(1.06)}
+.lo{display:inline-flex;align-items:center;gap:5px;margin-top:3px;padding:6px 12px;background:rgba(56,168,232,.1);border:1px solid rgba(56,168,232,.28);border-radius:6px;font-size:12px;font-weight:600;color:var(--gold-lt);font-family:var(--ff-b);transition:all .2s}
+.lo:hover{background:rgba(56,168,232,.22);color:#fff}
+.lnu{display:inline-flex;align-items:center;gap:5px;margin-top:2px;padding:5px 10px;background:rgba(253,243,224,.03);border:1px solid rgba(253,243,224,.1);border-radius:6px;font-size:11px;color:rgba(240,248,255,.3)}
+.lib-footer{background:rgba(2,10,38,.6);border-top:1px solid rgba(56,168,232,.2);padding:28px 24px 44px;margin-top:40px}
+.lfi{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px}
+.lfc h4{font-family:var(--ff-sc);font-size:10px;letter-spacing:.12em;color:var(--gold);margin-bottom:9px}
+.lfc a{display:block;font-size:13px;color:rgba(240,248,255,.55);margin-bottom:4px}
+.lfc a:hover{color:var(--gold-lt)}
+.lfc2{text-align:center;font-size:11px;color:rgba(240,248,255,.28);margin-top:18px;padding-top:14px;border-top:1px solid rgba(240,248,255,.07)}
+@media(max-width:600px){.lib-grid{columns:1}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="portal-id library" style="flex-shrink:0;margin-right:8px">📚 Library</div><div class="nav-logo">ROG Resource Library<span>Media &amp; Book Curriculum</span></div>
+  <div class="nav-links">
+    <a href="https://reflectionsofgracebiblestudies.netlify.app" class="home">&#8592; Training Portal</a>
+    <a href="https://rog-access-hub.netlify.app" target="_blank">Access Hub</a>
+    <a href="https://reflectionsofgraceministryportal.netlify.app" target="_blank">Ministry</a>
+    <a href="https://github.com/rograceoutreach-a11y" target="_blank">&#9881; GitHub</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Reflections of Grace Outreach Ministries, Inc.</div>
+  <h1>Media &amp; Book Resource Library</h1>
+  <p>A comprehensive cross-referenced bibliography — free eBooks, peer-reviewed journals, digital archives, media, and scholarly resources linked across all 13 phases of the ROG curriculum. Every card opens the original source.</p>
+  <div class="hero-stats">
+    <div><div class="hs-n" id="stat-total">562</div><div class="hs-l">Resources</div></div>
+    <div><div class="hs-n">13</div><div class="hs-l">Phases</div></div>
+    <div><div class="hs-n">8</div><div class="hs-l">Categories</div></div>
+    <div><div class="hs-n">Free</div><div class="hs-l">Always</div></div>
+  </div>
+  <div class="portal-btns">
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/#/research" class="portal-btn primary">&#128214; Galatians Research Archive</a>
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/#/books" class="portal-btn outline">&#128218; Book Curriculum</a>
+    <a href="https://reflectionsofgracebiblestudies.netlify.app/#/enroll" class="portal-btn outline">Enroll Free</a>
+  </div>
+  <p style="font-size:12px;color:rgba(240,248,255,.35);margin-top:8px">Thomas E. Walker, MDiv. &amp; Denise Ford-Walker &middot; Moreno Valley, CA &middot; 501c3 Nonprofit</p>
+</div>
+
+<div class="filter-bar">
+  <div class="search-wrap">
+    <input id="lib-search" type="search" placeholder="Search by title, author, journal, topic, phase&#8230;" autocomplete="off"/>
+    <div class="filter-row">
+      <span class="fl">Type:</span>
+      <button class="fb active" data-ft="all">All</button>
+      <button class="fb" data-ft="Scholarly">Scholarly</button>
+      <button class="fb" data-ft="Video">Video</button>
+      <button class="fb" data-ft="Free eBook">Free eBook</button>
+      <button class="fb" data-ft="Journal">Journal</button>
+      <button class="fb" data-ft="Digital Archive">Digital Archive</button>
+      <button class="fb" data-ft="Media">Media</button>
+      <button class="fb" data-ft="Ancient History">Ancient History</button>
+      <button class="fb" data-ft="Biblical Reference">Biblical Ref</button>
+    </div>
+    <div class="filter-row" id="phase-filters">
+      <span class="fl">Phase:</span>
+      <button class="fb active" data-fp="all">All Phases</button>
+    </div>
+  </div>
+</div>
+
+<div class="lib-wrap">
+  <div class="rc" id="rc"></div>
+  <div class="lib-grid" id="lib-grid"></div>
+</div>
+
+<footer class="lib-footer">
+  <div class="lfi">
+    <div class="lfc">
+      <h4>Training Portals</h4>
+      <a href="https://reflectionsofgracebiblestudies.netlify.app">Training Portal</a>
+      <a href="https://rog-access-hub.netlify.app">Access Hub</a>
+      <a href="https://reflectionsofgraceministryportal.netlify.app">Ministry Portal</a>
+    </div>
+    <div class="lfc">
+      <h4>Curriculum</h4>
+      <a href="https://reflectionsofgracebiblestudies.netlify.app/#/research">Research Archive</a>
+      <a href="https://reflectionsofgracebiblestudies.netlify.app/#/books">Book Curriculum</a>
+      <a href="https://reflectionsofgracebiblestudies.netlify.app/#/enroll">Enroll Free</a>
+    </div>
+    <div class="lfc">
+      <h4>GitHub Source</h4>
+      <a href="https://github.com/rograceoutreach-a11y/Training-Portal" target="_blank">Training-Portal &#8599;</a>
+      <a href="https://github.com/rograceoutreach-a11y/-ROG-Access-Hub" target="_blank">ROG-Access-Hub &#8599;</a>
+      <a href="https://github.com/rograceoutreach-a11y/Reflections-of-Grace-Bible-Ministries" target="_blank">Ministry-Portal &#8599;</a>
+    </div>
+    <div class="lfc">
+      <h4>Contact</h4>
+      <a href="https://rog-library.netlify.app" style="display:block;margin-bottom:4px">📚 rog-library.netlify.app</a>
+      <a href="mailto:rograceoutreach@gmail.com">rograceoutreach@gmail.com</a>
+      <a href="https://www.reflectionsofgraceoutreachministries.org" target="_blank">Ministry Website &#8599;</a>
+      <a href="https://www.youtube.com/@reflectionsofgraceoutreach633" target="_blank">YouTube &#8599;</a>
+    </div>
+  </div>
+  <p class="lfc2">Thomas E. Walker, MDiv. &amp; Denise Ford-Walker &middot; Moreno Valley, CA &middot; 501c3 Nonprofit &middot; All external resources link to their original free publishers.</p>
+</footer>
+
+<script>//* ROG Library — https://rog-library.netlify.app */
+
+const PHASE_META={'phase01':{title:'Biblical Foundations',color:'#1B3A6B',num:'01'},'phase02':{title:'The Vacuum Effect',color:'#2E5FA3',num:'02'},'phase03':{title:'Integrated Christian Counseling',color:'#B8860B',num:'03'},'phase04':{title:'Now Is the Time to Believe',color:'#1B5E20',num:'04'},'phase05':{title:'It Should Not Be in the Church',color:'#7B1A1A',num:'05'},'phase06':{title:'Generation X Left the Church',color:'#4A148C',num:'06'},'phase07':{title:'Praying to Know Him',color:'#1B3A6B',num:'07'},'phase08':{title:'Holding On When Destined',color:'#0F5F5F',num:'08'},'phase09':{title:'Psychology, Theology & Spirituality',color:'#7B1A3A',num:'09'},'phase10':{title:'Survey of Romans 1-3',color:'#2C3E6B',num:'10'},'phase11':{title:'Survey of Romans 4-6',color:'#3D2B6B',num:'11'},'phase12':{title:'Servant Leaders in Christ',color:'#1A3A1A',num:'12'},'phase13':{title:'Galatians: Faith, Freedom & Spirit',color:'#6B2A00',num:'13'}};
+const LIBRARY_DATA=[
+{icon:'\\ud83d\\udcc4',title:'The Chicago Statement on Biblical Inerrancy (1978)',type:'Scholarly',tag:'Reference',meta:'The definitive evangelical scholarly statement on Scripture\'s authority',url:'https://www.bible-researcher.com/chicago1.html',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Knowing Scripture \\u2014 R.C. Sproul',type:'Scholarly',tag:'Book',meta:'Accessible scholarly guide to Bible study methodology',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Journal of the Evangelical Theological Society',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed scholarship on biblical authority and theology',url:'https://www.etsjets.org/JETS',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'The Hermeneutical Spiral \\u2014 Grant Osborne',type:'Scholarly',tag:'Scholarly',meta:'Graduate-level hermeneutics from a leading evangelical scholar',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Biblical Hermeneutics \\u2014 Roy Zuck',type:'Scholarly',tag:'Scholarly',meta:'Dallas Seminary\'s academic hermeneutics textbook',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Journal for the Study of the NT \\u2014 SAGE',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed New Testament interpretation scholarship',url:'https://journals.sagepub.com/home/jsn',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Old Testament Theology \\u2014 Walter Brueggemann',type:'Scholarly',tag:'Scholarly',meta:'Leading scholarly treatment of OT\'s major themes',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'How the OT Develops Key Themes \\u2014 Goldsworthy',type:'Scholarly',tag:'Book',meta:'Christ-centered OT biblical theology',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Vetus Testamentum \\u2014 Brill',type:'Scholarly',tag:'Journal',meta:'International peer-reviewed OT scholarship journal',url:'https://brill.com/view/journals/vt/vt-overview.xml',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'The New Testament and Its World \\u2014 N.T. Wright & Michael Bird',type:'Scholarly',tag:'Scholarly',meta:'Comprehensive NT scholarship in its historical context',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'New Testament Studies \\u2014 Cambridge',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed NT scholarship journal',url:'https://www.cambridge.org/core/journals/new-testament-studies',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Word Biblical Commentary \\u2014 NT volumes',type:'Scholarly',tag:'Reference',meta:'Detailed scholarly verse-by-verse NT commentary series',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Spiritual Formation & Soul Care \\u2014 Biola',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on discipleship and spiritual formation',url:'https://journals.sagepub.com/home/jsc',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'The Master Plan of Evangelism \\u2014 Robert Coleman',type:'Scholarly',tag:'Book',meta:'Influential study of Jesus\' discipleship methodology',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Transforming Discipleship \\u2014 Greg Ogden',type:'Scholarly',tag:'Scholarly',meta:'Scholarly and practical approach to intentional disciple-making',url:'',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Celebration of Discipline \\u2014 Richard Foster',type:'Scholarly',tag:'Book',meta:'Classic work on the twelve spiritual disciplines',url:'https://archive.org/search?query=celebration+of+discipline+foster',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Spiritual Formation & Soul Care',type:'Scholarly',tag:'Journal',meta:'Research on how spiritual practices form Christian character',url:'https://journals.sagepub.com/home/jsc',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'Renovation of the Heart \\u2014 Dallas Willard',type:'Scholarly',tag:'Scholarly',meta:'The theology and practice of spiritual transformation',url:'',phase:'phase01'},
+{icon:'📖',title:'Evidence That Demands a Verdict \\u2014 Josh McDowell',type:'Biblical Reference',tag:'Book',meta:'Classic apologetics text on biblical reliability and authority',url:'https://archive.org/search?query=evidence+demands+verdict+mcdowell',phase:'phase01'},
+{icon:'📖',title:'How to Read the Bible for All Its Worth \\u2014 Fee & Stuart',type:'Biblical Reference',tag:'Book',meta:'The standard evangelical hermeneutics text for all believers',url:'https://archive.org/search?query=how+to+read+bible+fee+stuart',phase:'phase01'},
+{icon:'📖',title:'The Cost of Discipleship \\u2014 Dietrich Bonhoeffer',type:'Biblical Reference',tag:'Book',meta:'The classic work on radical, costly discipleship',url:'https://archive.org/search?query=cost+of+discipleship+bonhoeffer',phase:'phase01'},
+{icon:'▶️',title:'Why Trust the Bible? \\u2014 The Bible Project',type:'Video',tag:'YouTube',meta:'Free animated overview of biblical reliability',url:'https://www.youtube.com/watch?v=ak06MSETeo4',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Teaching Channel',type:'Video',tag:'YouTube',meta:'Thomas E. Walker MDiv. \\u2014 weekly biblical teaching',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace Ministry Podcast',type:'Video',tag:'Podcast',meta:'Audio teachings on Scripture and Christian life',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase01'},
+{icon:'▶️',title:'How to Study the Bible \\u2014 The Bible Project',type:'Video',tag:'YouTube',meta:'Free YouTube series on context and biblical genre',url:'https://www.youtube.com/watch?v=_OLezoUvOEQ',phase:'phase01'},
+{icon:'▶️',title:'Inductive Bible Study \\u2014 Spoken Gospel',type:'Video',tag:'YouTube',meta:'Observation, Interpretation, Application method explained',url:'https://www.youtube.com/c/SpokenGospel',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Teaching Videos',type:'Video',tag:'YouTube',meta:'Thomas Walker on reading and applying Scripture today',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'The Old Testament \\u2014 The Bible Project Overview',type:'Video',tag:'YouTube',meta:'Animated book-by-book OT overview series \\u2014 free',url:'https://www.youtube.com/playlist?list=PLH0Szn1yYNeeVFodkI9J_WEATHQqmueA4',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 OT Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on the Old Testament and its relevance today',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'New Testament Overview \\u2014 The Bible Project',type:'Video',tag:'YouTube',meta:'Animated NT book-by-book overview series \\u2014 free',url:'https://www.youtube.com/playlist?list=PLH0Szn1yYNefc4EAX3nSv9aUuasfp5ZMM',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 NT Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on the Gospels and Epistles',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teaching on New Testament themes',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Discipleship Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on what it means to make disciples today',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Discipleship, encouragement, and spiritual growth',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase01'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Teaching on discipleship and Christian formation',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase01'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Faith in Daily Life',type:'Video',tag:'YouTube',meta:'Thomas Walker on incarnational Christian living',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase01'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs of faith and daily encouragement',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase01'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Devotional living and spiritual encouragement',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase01'},
+{icon:'\\ud83d\\udcc4',title:'The Secular Age \\u2014 Charles Taylor',type:'Scholarly',tag:'Scholarly',meta:'Landmark sociological study on why God was displaced from public life',url:'https://archive.org/search?query=secular+age+charles+taylor',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'The Screwtape Letters \\u2014 C.S. Lewis',type:'Scholarly',tag:'Extra-Biblical',meta:'Classic extra-biblical depiction of how spiritual vacuums are exploited',url:'https://archive.org/search?query=screwtape+letters+lewis',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Sociology of Religion \\u2014 Berger & Luckmann',type:'Scholarly',tag:'Scholarly',meta:'Social construction of reality and how meaning systems collapse',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Fatherless in America \\u2014 David Blankenhorn',type:'Scholarly',tag:'Scholarly',meta:'Sociological research on absent fathers and community collapse',url:'https://archive.org/search?query=fatherless+america+blankenhorn',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Marriage and Family \\u2014 Wiley',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on family structure and outcomes',url:'https://onlinelibrary.wiley.com/journal/17413737',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Bringing Up Boys \\u2014 James Dobson',type:'Scholarly',tag:'Extra-Biblical',meta:'Biblical framework for raising children without a father\'s presence',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Attachment Theory \\u2014 Bowlby & Ainsworth',type:'Scholarly',tag:'Scholarly',meta:'How early attachment wounds shape all future relationships',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'The Emotionally Healthy Church \\u2014 Peter Scazzero',type:'Scholarly',tag:'Book',meta:'How emotional immaturity and love wounds manifest in church life',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Theology',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on love, attachment, and faith',url:'https://journals.sagepub.com/home/ptj',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Bowling Alone \\u2014 Robert Putnam',type:'Scholarly',tag:'Scholarly',meta:'Harvard research on the collapse of American community and its effects',url:'https://archive.org/search?query=bowling+alone+putnam',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Life Together \\u2014 Dietrich Bonhoeffer',type:'Scholarly',tag:'Extra-Biblical',meta:'Classic theological text on the nature of Christian community',url:'https://archive.org/search?query=life+together+bonhoeffer',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Community & Applied Social Psychology',type:'Scholarly',tag:'Journal',meta:'Research on social isolation and its psychological effects',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Post-Traumatic Growth \\u2014 Tedeschi & Calhoun',type:'Scholarly',tag:'Journal',meta:'Psychological Inquiry 15(1) \\u2014 how crisis can produce unexpected growth',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Man\'s Search for Meaning \\u2014 Viktor Frankl',type:'Scholarly',tag:'Extra-Biblical',meta:'Finding purpose and meaning in the midst of suffering',url:'https://archive.org/search?query=mans+search+for+meaning+frankl',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Resilience: Hard-Won Wisdom for Living a Better Life \\u2014 Eric Greitens',type:'Scholarly',tag:'Scholarly',meta:'Research-based framework for building resilience through adversity',url:'',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Forgiveness and Reconciliation \\u2014 Worthington',type:'Scholarly',tag:'Scholarly',meta:'The REACH model \\u2014 peer-reviewed clinical forgiveness research',url:'https://www.evworthington-forgiveness.com/',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'The Vacuum Effect \\u2014 Walker: Restoration Chapters',type:'Scholarly',tag:'Walker Book',meta:'Walker\'s framework for spiritual and communal restoration',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology & Christianity \\u2014 CAPS',type:'Scholarly',tag:'Journal',meta:'Research on forgiveness, restoration, and faith integration',url:'https://caps.net/jpc/',phase:'phase02'},
+{icon:'📖',title:'The Vacuum Effect \\u2014 Thomas E. Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Phase 02 core text \\u2014 Walker\'s first-hand account of the vacuum principle',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase02'},
+{icon:'📖',title:'The Vacuum Effect \\u2014 Family Chapters \\u2014 Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s analysis of family breakdown and restoration',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase02'},
+{icon:'📖',title:'The Vacuum Effect \\u2014 Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Walker on love deficits and their spiritual consequences',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase02'},
+{icon:'📖',title:'The Vacuum Effect \\u2014 Walker: Surviving the Shift',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s guidance on navigating seasons of crisis and displacement',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase02'},
+{icon:'📖',title:'Total Forgiveness \\u2014 R.T. Kendall',type:'Biblical Reference',tag:'Extra-Biblical',meta:'Biblical and practical guide to forgiveness as the path to restoration',url:'https://archive.org/search?query=total+forgiveness+kendall',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect \\u2014 Full YouTube Playlist',type:'Video',tag:'Walker Video',meta:'Thomas E. Walker\'s complete teaching series on Phase 02',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker\'s short-form teaching on spiritual emptiness in culture',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase02'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teachings on the vacuum effect',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect Playlist \\u2014 YouTube',type:'Video',tag:'Walker Video',meta:'Walker\'s full teaching series including family vacuum chapters',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Family healing and restoration through faith',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase02'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs of family healing and restoration',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect \\u2014 Walker Playlist',type:'Video',tag:'Walker Video',meta:'Teaching series including the vacuum of love chapters',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Songs and teaching on healing and God\'s love',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase02'},
+{icon:'▶️',title:'Walking with Denise \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Devotional audio on love, healing, and restoration',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect Playlist \\u2014 YouTube',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching on the vacuum of community',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Community Teaching',type:'Video',tag:'YouTube',meta:'Building covenant community in the 21st century',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase02'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Short teachings on community, isolation, and faith',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect Playlist \\u2014 YouTube',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching on surviving the shift',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Songs of strength for seasons of shift and trial',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase02'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teachings on resilience and faith in crisis',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase02'},
+{icon:'▶️',title:'The Vacuum Effect Playlist \\u2014 Restoration Teaching',type:'Video',tag:'Walker Video',meta:'Walker\'s closing sessions on restoration and renewal',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase02'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Worship and encouragement for seasons of restoration',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase02'},
+{icon:'▶️',title:'Denise Ford-Walker \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs of restoration and hope',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase02'},
+{icon:'\\ud83d\\udcc4',title:'Psychology & Christianity: Five Views \\u2014 Johnson (Ed.)',type:'Scholarly',tag:'Scholarly',meta:'Leading scholarly debate on integration models',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Theology \\u2014 Sage',type:'Scholarly',tag:'Journal',meta:'The flagship peer-reviewed Christian counseling integration journal',url:'https://journals.sagepub.com/home/ptj',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Christianity \\u2014 CAPS',type:'Scholarly',tag:'Journal',meta:'Applied and theoretical integration scholarship',url:'https://caps.net/jpc/',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Attachment and Loss \\u2014 John Bowlby',type:'Scholarly',tag:'Scholarly',meta:'The foundational attachment theory text',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'When God and Science Meet \\u2014 NIH / Pew',type:'Scholarly',tag:'Data',meta:'Research review on neuroscience, psychology, and religious belief',url:'https://www.pewresearch.org/religion/',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Cognitive Therapy and the Emotional Disorders \\u2014 Beck',type:'Scholarly',tag:'Scholarly',meta:'The clinical CBT foundational text by Aaron Beck',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'FICA Spiritual History Tool \\u2014 Puchalski',type:'Scholarly',tag:'Clinical Tool',meta:'The validated spiritual assessment instrument for clinical settings',url:'https://gwish.smhs.gwu.edu/fica-spiritual-history-tool',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Religion & Health \\u2014 Koenig et al.',type:'Scholarly',tag:'Scholarly',meta:'Oxford Handbook of Religion and Health \\u2014 comprehensive research review',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'JFIC \\u2014 Faith Integration in Counseling',type:'Scholarly',tag:'Free',meta:'Free open-access research on spiritual disciplines and therapy',url:'https://jfic.researchcommons.org/',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'The Body Keeps the Score \\u2014 Bessel van der Kolk',type:'Scholarly',tag:'Scholarly',meta:'The landmark trauma neuroscience text \\u2014 widely cited',url:'https://archive.org/search?query=body+keeps+score+van+der+kolk',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Post-Traumatic Growth \\u2014 Tedeschi & Calhoun (2004)',type:'Scholarly',tag:'Journal',meta:'Psychological Inquiry 15(1) \\u2014 the foundational PTG research',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'JFIC \\u2014 Trauma and Faith Integration',type:'Scholarly',tag:'Free',meta:'Open access research on trauma, faith, and counseling',url:'https://jfic.researchcommons.org/',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Multicultural Counseling and Therapy \\u2014 Sue & Sue',type:'Scholarly',tag:'Scholarly',meta:'The leading text on cultural competence in counseling',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Cultural Humility in Counseling \\u2014 Hook et al.',type:'Scholarly',tag:'Journal',meta:'Journal of Counseling Psychology research on humility and effectiveness',url:'',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'American Journal of Family Therapy',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on marriage, family, and cross-cultural counseling',url:'https://www.tandfonline.com/journals/uaft20',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Psychology, Theology & Spirituality \\u2014 McMinn: Capstone',type:'Scholarly',tag:'Core Text',meta:'McMinn\'s final chapter on integration and the therapeutic relationship',url:'https://archive.org/search?query=psychology+theology+spirituality+mcminn',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Theology \\u2014 Integration Articles',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed models of personal integration statements',url:'https://journals.sagepub.com/home/ptj',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Competencies for Counseling the Religiously Diverse \\u2014 ACA',type:'Scholarly',tag:'Professional',meta:'ACA\'s official competency framework for spiritually integrated counseling',url:'',phase:'phase03'},
+{icon:'📖',title:'Psychology, Theology & Spirituality in Christian Counseling \\u2014 McMinn',type:'Biblical Reference',tag:'Core Text',meta:'The standard integration textbook for Phase 03',url:'https://archive.org/search?query=psychology+theology+spirituality+mcminn',phase:'phase03'},
+{icon:'📖',title:'Christian Counseling: A Comprehensive Guide \\u2014 Gary Collins',type:'Biblical Reference',tag:'Free',meta:'Gary Collins\' 700+ page integration reference \\u2014 free on Archive.org',url:'https://archive.org/search?query=christian+counseling+gary+collins',phase:'phase03'},
+{icon:'📖',title:'Psychology, Theology & Spirituality \\u2014 McMinn: Ch. 2-3',type:'Biblical Reference',tag:'Core Text',meta:'McMinn\'s clinical chapters on prayer and Scripture in counseling',url:'https://archive.org/search?query=psychology+theology+spirituality+mcminn',phase:'phase03'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Counseling Teaching Channel',type:'Video',tag:'YouTube',meta:'Thomas Walker MDiv. on integrated Christian ministry',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase03'},
+{icon:'▶️',title:'Christian Counseling Basics \\u2014 AACC',type:'Video',tag:'YouTube',meta:'American Association of Christian Counselors training videos',url:'https://www.youtube.com/c/AACC',phase:'phase03'},
+{icon:'▶️',title:'CCEF \\u2014 Soul Care Resources',type:'Video',tag:'Free',meta:'Center for Biblical Counseling \\u2014 free video and article library',url:'https://www.ccef.org',phase:'phase03'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Biblical Psychology Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on psychology through a biblical lens',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase03'},
+{icon:'▶️',title:'Attachment Theory Explained \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Accessible overview of Bowlby\'s attachment framework',url:'https://www.youtube.com/results?search_query=attachment+theory+bowlby+explained',phase:'phase03'},
+{icon:'▶️',title:'JFIC \\u2014 Open Access Counseling Journal',type:'Video',tag:'Free',meta:'Free peer-reviewed integration articles on theory and practice',url:'https://jfic.researchcommons.org/',phase:'phase03'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Prayer and Ministry',type:'Video',tag:'YouTube',meta:'Thomas Walker on the role of prayer in pastoral care',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase03'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teaching on spiritual formation and soul care',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase03'},
+{icon:'▶️',title:'CCEF \\u2014 Spiritual Formation Videos',type:'Video',tag:'Free',meta:'Free resources on prayer, Scripture, and the counseling relationship',url:'https://www.ccef.org',phase:'phase03'},
+{icon:'▶️',title:'Trauma and the Church \\u2014 Diane Langberg',type:'Video',tag:'YouTube',meta:'YouTube lecture series on trauma-informed ministry',url:'https://www.youtube.com/results?search_query=diane+langberg+trauma+church',phase:'phase03'},
+{icon:'▶️',title:'Lament and Healing \\u2014 The Bible Project',type:'Video',tag:'Free',meta:'Free animated video on the theology of suffering and lament',url:'https://www.youtube.com/watch?v=v8HMzPBzLwA',phase:'phase03'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Pastoral teaching on trauma, grief, and redemptive suffering',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase03'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Cultural Humility Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on ministry across cultural lines',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase03'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Reaching diverse communities with compassion and cultural wisdom',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase03'},
+{icon:'▶️',title:'CCEF \\u2014 Cross-Cultural Resources',type:'Video',tag:'Free',meta:'Free articles and videos on diverse populations and soul care',url:'https://www.ccef.org',phase:'phase03'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Integration and Formation',type:'Video',tag:'YouTube',meta:'Thomas Walker on becoming the counselor God is forming you to be',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase03'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teaching on calling, formation, and Christian counseling',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase03'},
+{icon:'▶️',title:'JFIC \\u2014 Open Access Counseling Research',type:'Video',tag:'Free',meta:'Free scholarly articles on the integrated counselor',url:'https://jfic.researchcommons.org/',phase:'phase03'},
+{icon:'\\ud83d\\udcc4',title:'Pew Research: Religious Landscape 2023',type:'Scholarly',tag:'Data',meta:'Current data on faith, nones, and the urgent state of American religion',url:'https://www.pewresearch.org/religion/',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'The Rise of the Nones \\u2014 Ryan Burge',type:'Scholarly',tag:'Scholarly',meta:'Peer-reviewed data on who is leaving faith and why \\u2014 essential context',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Journal of the Evangelical Theological Society',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed eschatology and urgency in contemporary theology',url:'https://www.etsjets.org/JETS',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'The Psychology of Religion and Coping \\u2014 Pargament',type:'Scholarly',tag:'Scholarly',meta:'Guilford Press \\u2014 clinical research on how faith functions in crisis',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Religion, Faith, and Health Outcomes \\u2014 Koenig',type:'Scholarly',tag:'Scholarly',meta:'Oxford Handbook research on the measurable effects of faith',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Believing God \\u2014 Beth Moore',type:'Scholarly',tag:'Extra-Biblical',meta:'Practical guide to activating biblical faith in daily life',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'The Evangelism Handbook \\u2014 Alvin Reid',type:'Scholarly',tag:'Scholarly',meta:'Comprehensive scholarly and practical evangelism training text',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Missiology: An International Review \\u2014 SAGE',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed missions and evangelism journal',url:'https://journals.sagepub.com/home/mis',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Just Walk Across the Room \\u2014 Bill Hybels',type:'Scholarly',tag:'Extra-Biblical',meta:'Accessible relational evangelism guide for everyday believers',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Prayer: Finding the Heart\'s True Home \\u2014 Richard Foster',type:'Scholarly',tag:'Book',meta:'Classic scholarly-pastoral guide to the dimensions of prayer',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'The Transforming Power of Prayer \\u2014 JO Fraser',type:'Scholarly',tag:'Scholarly',meta:'Research on intercession and its effects on communities',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Spiritual Formation & Soul Care',type:'Scholarly',tag:'Journal',meta:'Research on intercessory prayer practice and spiritual formation',url:'https://journals.sagepub.com/home/jsc',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Generous Justice \\u2014 Tim Keller',type:'Scholarly',tag:'Scholarly',meta:'A theologically rigorous case for why the Gospel demands justice',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Missiology \\u2014 Reaching Post-Christian Generations',type:'Scholarly',tag:'Journal',meta:'SAGE peer-reviewed journal on missions and community engagement',url:'https://journals.sagepub.com/home/mis',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Rich Christians in an Age of Hunger \\u2014 Ronald Sider',type:'Scholarly',tag:'Extra-Biblical',meta:'Classic evangelical text on faith and economic justice',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'The Tangible Kingdom \\u2014 Hugh Halter & Matt Smay',type:'Scholarly',tag:'Extra-Biblical',meta:'Incarnational mission \\u2014 embedding the Gospel in everyday life',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Evangelism in the Early Church \\u2014 Michael Green',type:'Scholarly',tag:'Scholarly',meta:'Historical and theological study of first-century witnessing methods',url:'',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Missiology \\u2014 SAGE Journals',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on evangelism methods and effectiveness',url:'https://journals.sagepub.com/home/mis',phase:'phase04'},
+{icon:'📖',title:'Now Is the Time to Believe \\u2014 Thomas E. Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Phase 04 core text \\u2014 Walker\'s urgent call to active faith',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase04'},
+{icon:'📖',title:'Now Is the Time to Believe \\u2014 Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Walker on activating and sustaining mountain-moving faith',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase04'},
+{icon:'📖',title:'Now Is the Time to Believe \\u2014 Walker: Evangelism Chapters',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s practical guidance on personal witness today',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase04'},
+{icon:'📖',title:'Praying to Know Him, Praying From My Soul \\u2014 Denise Ford-Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Phase-connected book on prayer by Co-Founder Denise Ford-Walker',url:'https://www.amazon.com/Denise-P.-Ford/e/B08WQ7PY8N',phase:'phase04'},
+{icon:'📖',title:'Now Is the Time to Believe \\u2014 Walker: Witness Chapters',type:'Biblical Reference',tag:'Walker Book',meta:'Walker on living as a daily witness in a desperate hour',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase04'},
+{icon:'▶️',title:'Now Is the Time to Believe \\u2014 Full YouTube Playlist',type:'Video',tag:'Walker Video',meta:'Walker\'s complete Phase 04 teaching series',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase04'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker\'s short-form prophetic teaching and cultural commentary',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase04'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teachings on the urgency of the prophetic hour',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase04'},
+{icon:'▶️',title:'Now Is the Time Playlist \\u2014 YouTube',type:'Video',tag:'Walker Video',meta:'Walker\'s full teaching series on faith and the prophetic hour',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase04'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Songs of faith and encouragement from Co-Founder Denise Ford-Walker',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase04'},
+{icon:'▶️',title:'Denise Ford-Walker \\u2014 Spotify',type:'Video',tag:'Music',meta:'Music that builds and sustains mountain-moving faith',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase04'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Evangelism Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on personal witness in the 21st century',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase04'},
+{icon:'▶️',title:'How to Share Your Faith \\u2014 Living Waters',type:'Video',tag:'YouTube',meta:'Ray Comfort\'s practical YouTube evangelism training',url:'https://www.youtube.com/c/LivingWaters',phase:'phase04'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker\'s evangelism and outreach short-form content',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase04'},
+{icon:'▶️',title:'Now Is the Time Playlist \\u2014 Prayer Teaching',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching on prayer and intercession in the last days',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase04'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Prayer Channel',type:'Video',tag:'YouTube',meta:'Teaching on prayer, intercession, and spiritual warfare',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase04'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teachings on prayer and intercession',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase04'},
+{icon:'▶️',title:'Reflections of Grace Outreach \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Ministry videos showing community outreach in action',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase04'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Community encouragement and outreach from Co-Founder Denise',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase04'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Audio teaching on outreach, justice, and ministry without walls',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase04'},
+{icon:'▶️',title:'Now Is the Time Playlist \\u2014 Walker',type:'Video',tag:'Walker Video',meta:'Walker\'s complete Phase 04 teaching including daily witness',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase04'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Songs of witness and faith in daily life',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase04'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker\'s short-form outreach and witness content',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase04'},
+{icon:'\\ud83d\\udcc4',title:'Prophetic Untimeliness \\u2014 A.W. Tozer',type:'Scholarly',tag:'Extra-Biblical',meta:'Tozer\'s classic call to name what the church has tolerated',url:'https://archive.org/search?query=tozer+prophetic',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Church Scandal Research \\u2014 Baylor Institute for Studies of Religion',type:'Scholarly',tag:'Data',meta:'Data on abuse, scandal, and institutional failure in the church',url:'https://www.baylor.edu/isr/',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Recovering from Churches that Abuse \\u2014 Ron Enroth',type:'Scholarly',tag:'Scholarly',meta:'Research on harmful church environments and recovery',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'The Subtle Power of Spiritual Abuse \\u2014 VanVonderen & Johnson',type:'Scholarly',tag:'Scholarly',meta:'Clinical and pastoral study of spiritual abuse dynamics',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Religious Trauma Syndrome \\u2014 Marlene Winell',type:'Scholarly',tag:'Clinical',meta:'Clinical framework for identifying and treating church-related trauma',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Christianity',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on spiritual abuse and recovery',url:'https://caps.net/jpc/',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Unwanted: How Sexual Brokenness Reveals Our Way to Healing \\u2014 Jay Stringer',type:'Scholarly',tag:'Scholarly',meta:'Research-based pastoral approach to sexual brokenness and wholeness',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Shattered Vows \\u2014 Debra Laaser',type:'Scholarly',tag:'Clinical',meta:'Clinical and pastoral guide for spouses affected by sexual betrayal',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Sex & Marital Therapy',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on sexual ethics, theology, and clinical treatment',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Health and Wealth Gospels \\u2014 Jones & Woodbridge',type:'Scholarly',tag:'Scholarly',meta:'Scholarly theological critique of prosperity theology',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Christianity in Crisis \\u2014 Hank Hanegraaff',type:'Scholarly',tag:'Extra-Biblical',meta:'Historical and biblical critique of the prosperity movement',url:'https://archive.org/search?query=christianity+in+crisis+hanegraaff',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Sociology of American Religion \\u2014 Mark Chaves',type:'Scholarly',tag:'Data',meta:'Princeton data on giving, wealth, and institutional church finances',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'The Color of Compromise \\u2014 Jemar Tisby',type:'Scholarly',tag:'Scholarly',meta:'Historical account of the American church\'s complicity in racism',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Divided by Faith \\u2014 Emerson & Smith',type:'Scholarly',tag:'Scholarly',meta:'Sociological research on why American evangelicalism perpetuates racial division',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Race, Ethnicity & Religion',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on race, faith, and religious institutions',url:'https://raceandrelifion.com/',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Revival Fire \\u2014 Wesley Duewel',type:'Scholarly',tag:'Extra-Biblical',meta:'Historical studies in genuine church revival and its conditions',url:'https://archive.org/search?query=revival+fire+duewel',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'The Holiness of God \\u2014 R.C. Sproul',type:'Scholarly',tag:'Scholarly',meta:'Theological foundation for what holiness is and demands',url:'',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'Church Health Research \\u2014 The Barna Group',type:'Scholarly',tag:'Data',meta:'Data on church health, reform, and what attracts and retains believers',url:'https://www.barna.com/',phase:'phase05'},
+{icon:'📖',title:'It Shouldn\'t Be in the Church \\u2014 Thomas E. Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Phase 05 core text \\u2014 Walker\'s prophetic naming of church compromise',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase05'},
+{icon:'📖',title:'It Shouldn\'t Be in the Church \\u2014 Walker: Spiritual Abuse',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s analysis of the Shepherding Movement and its aftermath',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase05'},
+{icon:'📖',title:'It Shouldn\'t Be in the Church \\u2014 Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s pastoral response to sexual compromise in the church',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase05'},
+{icon:'📖',title:'It Shouldn\'t Be in the Church \\u2014 Walker: Mammon Chapters',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s prophetic critique of the prosperity gospel in the church',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase05'},
+{icon:'📖',title:'It Shouldn\'t Be in the Church \\u2014 Walker: Restoration',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s call to holiness and the church God intended',url:'https://www.amazon.com/Thomas-E-Walker/e/B01J6QEWLG',phase:'phase05'},
+{icon:'▶️',title:'It Shouldn\'t Be in the Church \\u2014 Playlist',type:'Video',tag:'Walker Video',meta:'Walker\'s full Phase 05 YouTube teaching series',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Healing, hope, and honesty for those hurt by the church',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase05'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Teaching on church reform and holiness',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase05'},
+{icon:'▶️',title:'Phase 05 Playlist \\u2014 Walker',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching series including spiritual abuse chapters',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Church Hurt and Healing \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Multiple perspectives on spiritual abuse recovery',url:'https://www.youtube.com/results?search_query=church+hurt+spiritual+abuse+healing',phase:'phase05'},
+{icon:'▶️',title:'Denise Ford-Walker \\u2014 Walking with Denise',type:'Video',tag:'YouTube',meta:'Healing and hope for those wounded by the institutional church',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase05'},
+{icon:'▶️',title:'Phase 05 Playlist \\u2014 Walker',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching series on sexual integrity and the church',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Holiness Teaching',type:'Video',tag:'YouTube',meta:'Walker on purity, integrity, and accountability',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase05'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Teaching on sexual integrity and restoration',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase05'},
+{icon:'▶️',title:'Phase 05 Playlist \\u2014 Walker',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching including the Mammon and prosperity gospel chapters',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Prosperity Gospel Exposed \\u2014 Justin Peters',type:'Video',tag:'YouTube',meta:'Biblical critique of health-wealth theology',url:'https://www.youtube.com/results?search_query=justin+peters+prosperity+gospel',phase:'phase05'},
+{icon:'▶️',title:'ROG Ministry Podcast \\u2014 Spotify',type:'Video',tag:'Podcast',meta:'Teaching on a biblical theology of money and giving',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase05'},
+{icon:'▶️',title:'Phase 05 Playlist \\u2014 Racism and Reconciliation',type:'Video',tag:'Walker Video',meta:'Walker\'s teaching on race and the Body of Christ',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Reconciliation Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on racial healing and Kingdom unity',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase05'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs of unity, healing, and Kingdom vision',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase05'},
+{icon:'▶️',title:'Phase 05 Playlist \\u2014 Holiness and Reform',type:'Video',tag:'Walker Video',meta:'Walker\'s closing sessions on restoring the church God intended',url:'https://www.youtube.com/watch?v=t7MavKqoExo&list=PL0sV-2529XGDFDSmN70keD_f87FmwYtR_',phase:'phase05'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Holiness Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on what genuine holiness looks like in the church today',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase05'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 YouTube',type:'Video',tag:'YouTube',meta:'Songs of consecration, repentance, and renewal',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase05'},
+{icon:'\\ud83d\\udcc4',title:'American Generations \\u2014 Pew Research Center',type:'Scholarly',tag:'Data',meta:'Demographic data on Gen X, Millennials, and Gen Z religion trends',url:'https://www.pewresearch.org/social-trends/2015/09/03/the-whys-and-hows-of-generations-research/',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'The Nones \\u2014 Ryan Burge (2021)',type:'Scholarly',tag:'Scholarly',meta:'Peer-reviewed data on Gen X as the last traditionally religious generation',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Journal for the Scientific Study of Religion',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on generational religious change',url:'https://onlinelibrary.wiley.com/journal/14685906',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'The Shepherding Movement \\u2014 S. David Moore',type:'Scholarly',tag:'Scholarly',meta:'Historical and theological analysis of the Shepherding Movement\'s impact',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Toxic Faith \\u2014 Stephen Arterburn',type:'Scholarly',tag:'Scholarly',meta:'Research on spiritual addiction and abusive religious systems',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Church Decline Research \\u2014 Barna Group',type:'Scholarly',tag:'Data',meta:'Data on why Gen X left and what would bring them back',url:'https://www.barna.com/',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'This Present Darkness \\u2014 Frank Peretti',type:'Scholarly',tag:'Extra-Biblical',meta:'Fictional but theologically grounded portrayal of principalities in a community',url:'https://archive.org/search?query=this+present+darkness+peretti',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Entertaining Ourselves to Death \\u2014 Neil Postman',type:'Scholarly',tag:'Scholarly',meta:'Cultural media critique \\u2014 how media colonizes and reshapes consciousness',url:'https://archive.org/search?query=amusing+ourselves+death+postman',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Hip Hop Church \\u2014 Phil Jackson',type:'Scholarly',tag:'Scholarly',meta:'Baker Books \\u2014 cultural analysis of Hip-Hop and the Church\'s response',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'The Rise of the Nones 2023 \\u2014 Pew Research',type:'Scholarly',tag:'Data',meta:'28-34% of Americans now identify as religiously unaffiliated',url:'https://www.pewresearch.org/religion/2023/11/09/religious-nones-in-america/',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Deconstruction and Faith \\u2014 Ryan Burge / Christianity Today',type:'Scholarly',tag:'Article',meta:'Research on faith deconstruction among Millennials and Gen Z',url:'https://www.christianitytoday.com',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Meet Generation Z \\u2014 James Emery White',type:'Scholarly',tag:'Scholarly',meta:'Understanding the post-Gen X generations the church must reach',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Recovering from Religion \\u2014 Marlene Winell',type:'Scholarly',tag:'Clinical',meta:'Clinical framework for Religious Trauma Syndrome and recovery',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'The Body Keeps the Score \\u2014 van der Kolk',type:'Scholarly',tag:'Scholarly',meta:'Trauma neuroscience applicable to religious trauma and healing',url:'https://archive.org/search?query=body+keeps+score+van+der+kolk',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Journal of Psychology and Christianity',type:'Scholarly',tag:'Journal',meta:'Research on religious trauma, God-image wounds, and clinical recovery',url:'https://caps.net/jpc/',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Pew Research: Religious Nones 2023',type:'Scholarly',tag:'Data',meta:'The data on who left and what would bring them back',url:'https://www.pewresearch.org/religion/2023/11/09/religious-nones-in-america/',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Finding Faith Again \\u2014 Patrick Cheng',type:'Scholarly',tag:'Scholarly',meta:'Research on return to faith after deconstruction and church hurt',url:'',phase:'phase06'},
+{icon:'\\ud83d\\udcc4',title:'Missiology \\u2014 Reaching Post-Christian Generations',type:'Scholarly',tag:'Journal',meta:'SAGE peer-reviewed research on missions to the religiously unaffiliated',url:'https://journals.sagepub.com/home/mis',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Thomas E. Walker',type:'Biblical Reference',tag:'Walker Book',meta:'Phase 06 core text \\u2014 ISBN: 978-0-9830162-8-1. Listen free on ElevenReader.',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Walker: The Shifting',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s analysis of the social and ecclesiastical forces that drove Gen X away',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Walker: Spirits Turned Loose',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s spiritual warfare analysis of Gen X cultural forces',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Walker: Severed Roots',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s analysis of how Gen X\'s departure reshaped the next generations',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Walker: Pastoral Wound Care',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s counseling framework for those wounded by the church',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'📖',title:'Generation X Left the Church \\u2014 Walker: The Response Plan',type:'Biblical Reference',tag:'Walker Book',meta:'Walker\'s final chapters: ministry without walls, old-time Gospel, new-time compassion',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 FREE Audiobook',type:'Video',tag:'Free Audiobook',meta:'Listen free on ElevenReader \\u2014 narrated by Thomas E. Walker',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker on Gen X, the church, and the current cultural crisis',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase06'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Gen X Teaching',type:'Video',tag:'YouTube',meta:'Thomas Walker on Generation X and their place in church history',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 Free Audiobook',type:'Video',tag:'Free Audiobook',meta:'ElevenReader \\u2014 full audiobook on the forces that drove Gen X away',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Church and Culture Teaching',type:'Video',tag:'YouTube',meta:'Walker on the institutional church and its failures',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase06'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Hope and healing for those wounded by the institutional church',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 Free Audiobook',type:'Video',tag:'Free Audiobook',meta:'Walker narrates the Spirits Turned Loose chapters \\u2014 listen free',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Spiritual Warfare in Culture \\u2014 Walker YouTube',type:'Video',tag:'YouTube',meta:'Thomas Walker on principalities and cultural spiritual forces',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase06'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker on spiritual warfare, deconstruction, and Gen Z',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 Free Audiobook',type:'Video',tag:'Free Audiobook',meta:'Walker on severed roots and the generational crisis \\u2014 listen free',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Generational Faith Teaching',type:'Video',tag:'YouTube',meta:'Walker on planting roots for the next generation',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase06'},
+{icon:'▶️',title:'TikTok \\u2014 @thomaswalker41011',type:'Video',tag:'TikTok',meta:'Walker engaging the deconstruction conversation directly',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 Free Audiobook',type:'Video',tag:'Free Audiobook',meta:'Walker\'s pastoral wound care chapters \\u2014 listen free on ElevenReader',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker',type:'Video',tag:'YouTube',meta:'Healing and restoration for those wounded by religious institutions',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase06'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs of healing, hope, and restoration for the wounded',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase06'},
+{icon:'▶️',title:'Generation X Left the Church \\u2014 Full Audiobook FREE',type:'Video',tag:'Free Audiobook',meta:'Complete audiobook \\u2014 Walker\'s full response plan in his own voice',url:'https://elevenreader.io/audiobooks/generation-x-left-the-church-now-all-hell-broke-loose/q8orhJlG5rR7bNbe5FXb',phase:'phase06'},
+{icon:'▶️',title:'Reflections of Grace \\u2014 Ministry Without Walls',type:'Video',tag:'YouTube',meta:'Thomas Walker on reaching the wounded and wandering',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase06'},
+{icon:'▶️',title:'Denise\'s Inspirational Melodies \\u2014 Spotify',type:'Video',tag:'Music',meta:'Songs that reach across generations with hope and restoration',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase06'},
+{icon:'📄',title:'The Soul of Prayer — P.T. Forsyth',type:'Scholarly',tag:'Classic',meta:'Classic theological text on prayer as the supreme activity of the soul — not a technique but a relationship.',url:'https://archive.org/search?query=soul+of+prayer+forsyth',phase:'phase07'},
+{icon:'📄',title:'Prayer: Does It Make Any Difference? — Philip Yancey',type:'Scholarly',tag:'Extra-Biblical',meta:'Widely cited accessible study of what prayer is, why it matters, and why it often feels unanswered.',url:'',phase:'phase07'},
+{icon:'📄',title:'Journal of Spiritual Formation & Soul Care — Biola',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on prayer, spiritual longing, and the formation of the inner life.',url:'https://journals.sagepub.com/home/jsc',phase:'phase07'},
+{icon:'📄',title:'The Knowledge of the Holy — A.W. Tozer',type:'Scholarly',tag:'Classic',meta:'Tozer\\',url:'https://archive.org/search?query=knowledge+holy+tozer',phase:'phase07'},
+{icon:'📄',title:'Theology of Prayer — Donald Bloesch',type:'Scholarly',tag:'Scholarly',meta:'Scholarly treatment of prayer as the primary means of knowing God experientially.',url:'',phase:'phase07'},
+{icon:'📄',title:'Journal of Psychology and Theology — Relationship with God',type:'Scholarly',tag:'Journal',meta:'Research on perceived closeness to God and its effects on mental health and behavior.',url:'https://journals.sagepub.com/home/ptj',phase:'phase07'},
+{icon:'📄',title:'Contemplative Prayer — Thomas Merton',type:'Scholarly',tag:'Extra-Biblical',meta:'Merton\\',url:'https://archive.org/search?query=contemplative+prayer+merton',phase:'phase07'},
+{icon:'📄',title:'The Practice of the Presence of God — Brother Lawrence',type:'Scholarly',tag:'Classic',meta:'The 17th-century classic on wordless, continuous communion with God in every moment.',url:'https://archive.org/search?query=practice+presence+god+brother+lawrence',phase:'phase07'},
+{icon:'📄',title:'Lament and Prayer Research — Journal of Spiritual Formation',type:'Scholarly',tag:'Journal',meta:'Academic study of how wordless and lament-based prayer function neurologically and spiritually.',url:'https://journals.sagepub.com/home/jsc',phase:'phase07'},
+{icon:'📄',title:'When God Is Silent — Barbara Brown Taylor',type:'Scholarly',tag:'Scholarly',meta:'Theological and pastoral treatment of divine hiddenness and persistent prayer.',url:'',phase:'phase07'},
+{icon:'📄',title:'Unanswered Prayer — John Ortberg',type:'Scholarly',tag:'Extra-Biblical',meta:'Accessible scholarly-pastoral guide to sustaining faith through seasons of silence.',url:'',phase:'phase07'},
+{icon:'📄',title:'Divine Hiddenness Research — J.L. Schellenberg',type:'Scholarly',tag:'Scholarly',meta:'Philosophical treatment of why God permits seasons of apparent silence — academic.',url:'',phase:'phase07'},
+{icon:'📄',title:'Intercessory Prayer — Dutch Sheets',type:'Scholarly',tag:'Extra-Biblical',meta:'The widely-read practical and theological guide to the ministry of intercession.',url:'',phase:'phase07'},
+{icon:'📄',title:'Intercessory Prayer Research — Francis Galton to Contemporary Studies',type:'Scholarly',tag:'Scholarly',meta:'Overview of empirical research on intercessory prayer from the 19th century to present.',url:'',phase:'phase07'},
+{icon:'📄',title:'Journal of Spiritual Formation & Soul Care — Intercession',type:'Scholarly',tag:'Journal',meta:'Research on intercessory prayer practice and its effects on the intercessor and recipient.',url:'https://journals.sagepub.com/home/jsc',phase:'phase07'},
+{icon:'📄',title:'Spiritual Warfare — Clinton Arnold',type:'Scholarly',tag:'Scholarly',meta:'The definitive Ephesians 6 scholarly commentary on principalities and prayer warfare.',url:'',phase:'phase07'},
+{icon:'📄',title:'The Bondage Breaker — Neil Anderson',type:'Scholarly',tag:'Extra-Biblical',meta:'Practical guide to spiritual warfare prayer widely used in Christian counseling.',url:'',phase:'phase07'},
+{icon:'📄',title:'Engaging the Enemy — Michael Green (ed.)',type:'Scholarly',tag:'Scholarly',meta:'Scholarly essays on spiritual warfare from evangelical theologians.',url:'',phase:'phase07'},
+{icon:'📄',title:'Fasting for Spiritual Breakthrough — Elmer Towns',type:'Scholarly',tag:'Extra-Biblical',meta:'Survey of nine biblical fasts with theological and practical guidance.',url:'',phase:'phase07'},
+{icon:'📄',title:'The Spiritual Disciplines — Richard Foster',type:'Scholarly',tag:'Classic',meta:'Foster\\',url:'https://archive.org/search?query=celebration+discipline+foster',phase:'phase07'},
+{icon:'📄',title:'Neuroscience of Fasting & Spiritual Practice',type:'Scholarly',tag:'Scholarly',meta:'Research on how fasting affects brain chemistry, attentiveness, and spiritual sensitivity.',url:'',phase:'phase07'},
+{icon:'📄',title:'The Practice of the Presence of God — Brother Lawrence',type:'Scholarly',tag:'Classic',meta:'The 17th-century capstone text on continuous communion with God in every moment.',url:'https://archive.org/search?query=practice+presence+god+brother+lawrence',phase:'phase07'},
+{icon:'📄',title:'A Rule of Life — Stephen Macchia',type:'Scholarly',tag:'Extra-Biblical',meta:'Practical framework for building personal spiritual rhythms that sustain a life of prayer.',url:'',phase:'phase07'},
+{icon:'📄',title:'Journal of Spiritual Formation & Soul Care — Prayer as Formation',type:'Scholarly',tag:'Journal',meta:'Research on how sustained prayer practices restructure identity and spiritual life.',url:'https://journals.sagepub.com/home/jsc',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Devotional teaching from the author — spiritual longing, prayer, and the life of faith.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Reflections of Grace — Prayer Teaching Series',type:'Video',tag:'Video',meta:'Thomas E. Walker on the theology and practice of prayer — Phase-connected teaching.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Worship music that expresses the soul-cry of prayer — Denise Ford-Walker.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise Ford-Walker on intimacy with God through consistent prayer.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs that express the intimacy of knowing God — worship from the author.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase07'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Teaching on knowing God through the disciplines of prayer.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on praying beyond words — Spirit-led communion.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Instrumental and worshipful songs for wordless prayer and contemplation.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase07'},
+{icon:'▶️',title:'Lament and Healing — The Bible Project',type:'Video',tag:'Video',meta:'Free animated video on the theology of prayer beyond words.',url:'https://www.youtube.com/watch?v=v8HMzPBzLwA',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Ford-Walker on sustaining prayer through seasons when God seems distant.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Reflections of Grace — Prayer and Perseverance',type:'Video',tag:'Video',meta:'Thomas Walker on praying through the valley and not losing heart.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of hope and perseverance for seasons of silent waiting.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on the ministry of intercession from the author of this curriculum.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Reflections of Grace — Intercession Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on carrying others to God in prayer.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase07'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on intercessory prayer and ministry.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise Ford-Walker on prayer as spiritual warfare.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Reflections of Grace — Spiritual Warfare Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on the armor of God and warfare prayer.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase07'},
+{icon:'▶️',title:'TikTok — @thomaswalker41011',type:'Video',tag:'Video',meta:'Short-form teaching on spiritual warfare and prayer authority.',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on fasting and prayer from the author.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Worship music for seasons of fasting and consecration.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase07'},
+{icon:'▶️',title:'Reflections of Grace — Fasting and Consecration',type:'Video',tag:'Video',meta:'Thomas Walker on the spiritual discipline of fasting.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase07'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Capstone teaching from the author on a life of continuous communion.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase07'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of devotion, consecration, and unceasing worship.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase07'},
+{icon:'▶️',title:'Denise Ford-Walker — Spotify',type:'Video',tag:'Video',meta:'Inspirational melodies for a life poured out in prayer.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase07'},
+{icon:'📄',title:'The Promises of God — R.C. Sproul',type:'Scholarly',tag:'Scholarly',meta:'Theological study of God\\',url:'',phase:'phase08'},
+{icon:'📄',title:'Standing on the Promises — Donald Bloesch',type:'Scholarly',tag:'Scholarly',meta:'Academic treatment of biblical promise theology and its pastoral application.',url:'',phase:'phase08'},
+{icon:'📄',title:'Journal of Biblical Literature — Promise and Fulfillment',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed studies on the promise-fulfillment schema across the biblical canon.',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase08'},
+{icon:'📄',title:'The Gift of Waiting — Paula D\\',type:'Scholarly',tag:'Extra-Biblical',meta:'Theological reflection on how waiting seasons form what nothing else can.',url:'',phase:'phase08'},
+{icon:'📄',title:'God\\',type:'Scholarly',tag:'Extra-Biblical',meta:'Pastoral study of biblical examples of divine timing and the theology of delay.',url:'',phase:'phase08'},
+{icon:'📄',title:'Post-Traumatic Growth Research — Tedeschi & Calhoun',type:'Scholarly',tag:'Scholarly',meta:'How seasons of waiting and adversity produce unexpected growth — psychological research.',url:'',phase:'phase08'},
+{icon:'📄',title:'The Resolution of Conflict — Kenneth Thomas',type:'Scholarly',tag:'Scholarly',meta:'Research on how opposition and adversity function as formative catalysts.',url:'',phase:'phase08'},
+{icon:'📄',title:'Man\\',type:'Scholarly',tag:'Classic',meta:'Frankl\\',url:'https://archive.org/search?query=mans+search+meaning+frankl',phase:'phase08'},
+{icon:'📄',title:'Journal of Positive Psychology — Adversarial Growth',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on how facing opposition builds resilience and character.',url:'https://www.tandfonline.com/journals/rpos20',phase:'phase08'},
+{icon:'📄',title:'Boundaries — Cloud & Townsend',type:'Scholarly',tag:'Extra-Biblical',meta:'The widely-used clinical-pastoral guide to letting go of unhealthy patterns and relationships.',url:'',phase:'phase08'},
+{icon:'📄',title:'Total Forgiveness — R.T. Kendall',type:'Scholarly',tag:'Extra-Biblical',meta:'Forgiveness as the primary act of release that clears the path to receiving.',url:'https://archive.org/search?query=total+forgiveness+kendall',phase:'phase08'},
+{icon:'📄',title:'Acceptance and Commitment Therapy — Hayes et al.',type:'Scholarly',tag:'Clinical',meta:'Evidence-based framework for psychological release and values-based living.',url:'',phase:'phase08'},
+{icon:'📄',title:'Resilience: Why Things Bounce Back — Zolli & Healy',type:'Scholarly',tag:'Scholarly',meta:'Research on what enables people to sustain function under prolonged adversity.',url:'',phase:'phase08'},
+{icon:'📄',title:'The Psychology of Hope — Snyder',type:'Scholarly',tag:'Scholarly',meta:'Academic framework for sustaining goal-directed thinking under prolonged stress.',url:'',phase:'phase08'},
+{icon:'📄',title:'Burnout and Faith — Journal of Psychology & Christianity',type:'Scholarly',tag:'Journal',meta:'Research on spiritual exhaustion, faith fatigue, and renewal in ministry contexts.',url:'https://caps.net/jpc/',phase:'phase08'},
+{icon:'📄',title:'Life Together — Dietrich Bonhoeffer',type:'Scholarly',tag:'Classic',meta:'The classic theological text on what genuine Christian community requires and provides.',url:'https://archive.org/search?query=life+together+bonhoeffer',phase:'phase08'},
+{icon:'📄',title:'Social Support and Health — Uchino et al.',type:'Scholarly',tag:'Scholarly',meta:'Research demonstrating that social support is among the strongest predictors of resilience.',url:'',phase:'phase08'},
+{icon:'📄',title:'Bowling Alone — Robert Putnam',type:'Scholarly',tag:'Scholarly',meta:'Harvard research on the collapse of community and its effects on human flourishing.',url:'https://archive.org/search?query=bowling+alone+putnam',phase:'phase08'},
+{icon:'📄',title:'Narrative Therapy — White & Epston',type:'Scholarly',tag:'Scholarly',meta:'The clinical framework of re-authoring life stories — testimony as therapeutic narrative.',url:'',phase:'phase08'},
+{icon:'📄',title:'The Power of Story — Jim Loehr',type:'Scholarly',tag:'Scholarly',meta:'Research on how personal narrative shapes identity, resilience, and future behavior.',url:'',phase:'phase08'},
+{icon:'📄',title:'Memory, Narrative, and Identity — Journal of Narrative Inquiry',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed research on how past story shapes present self-understanding.',url:'',phase:'phase08'},
+{icon:'📄',title:'Resilience and Post-Traumatic Growth — Tedeschi & Calhoun',type:'Scholarly',tag:'Scholarly',meta:'Research on how those who hold on through adversity are transformed by what they receive.',url:'',phase:'phase08'},
+{icon:'📄',title:'The Gifts of Imperfection — Brené Brown',type:'Scholarly',tag:'Extra-Biblical',meta:'On worthiness, receiving, and allowing oneself to accept what has been promised and granted.',url:'',phase:'phase08'},
+{icon:'📄',title:'Journal of Positive Psychology — Gratitude and Receiving',type:'Scholarly',tag:'Journal',meta:'Research on gratitude and the psychology of receiving promised outcomes.',url:'https://www.tandfonline.com/journals/rpos20',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on the faithfulness of God\\',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Reflections of Grace — Covenant Faithfulness Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on why God\\',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of covenant faith — holding onto what God has said.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on waiting seasons and why the delay is not a denial.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of patient faith and trust in God\\',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase08'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Teaching on waiting, faith, and the appointed time.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on navigating opposition on the way to your promise.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Reflections of Grace — Opposition and Faith',type:'Video',tag:'Video',meta:'Thomas Walker on why giants near the Promised Land are signs of imminent breakthrough.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase08'},
+{icon:'▶️',title:'TikTok — @thomaswalker41011',type:'Video',tag:'Video',meta:'Short-form teaching on faith through opposition.',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on the freedom that comes from releasing what God has not ordained.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of release, surrender, and the freedom of laying burdens down.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase08'},
+{icon:'▶️',title:'Reflections of Grace — Release and Renewal',type:'Video',tag:'Video',meta:'Teaching on letting go as an act of faith rather than defeat.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Ford-Walker on active waiting and renewing strength in God.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of endurance, renewal, and soaring on wings like eagles.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase08'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Teaching on faith fatigue, perseverance, and supernatural renewal.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Teaching on covenant community and holding promises together.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Reflections of Grace — Community and Faith',type:'Video',tag:'Video',meta:'Thomas Walker on why no one holds a promise alone.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of community, covenant, and walking together in faith.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise Ford-Walker on the power of testimony as fuel for persevering faith.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of testimony — declaring what God has done as an act of faith.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase08'},
+{icon:'▶️',title:'Reflections of Grace — Testimony Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on the weapon of the spoken testimony.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase08'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Capstone teaching from the author on receiving and stewarding the promise.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of receiving, rejoicing, and gratitude for fulfilled promises.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase08'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Worship celebrating the faithfulness of God in keeping His word.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase08'},
+{icon:'📄',title:'Psychology & Christianity: Five Views — Johnson (Ed.)',type:'Scholarly',tag:'Scholarly',meta:'The definitive scholarly debate: Levels of Explanation, Integration, Christian Psychology, Biblical Counseling, Transformational.',url:'',phase:'phase09'},
+{icon:'📄',title:'Journal of Psychology and Theology — Sage',type:'Scholarly',tag:'Journal',meta:'The flagship peer-reviewed journal for psychology-theology integration scholarship.',url:'https://journals.sagepub.com/home/ptj',phase:'phase09'},
+{icon:'📄',title:'Journal of Psychology and Christianity — CAPS',type:'Scholarly',tag:'Journal',meta:'Applied and theoretical integration scholarship from the Christian Association for Psychological Studies.',url:'https://caps.net/jpc/',phase:'phase09'},
+{icon:'📄',title:'Prayer and Health — Harold Koenig (Oxford Handbook)',type:'Scholarly',tag:'Scholarly',meta:'Comprehensive research review on prayer as an intervention and health outcome predictor.',url:'',phase:'phase09'},
+{icon:'📄',title:'FICA Spiritual History Tool — Puchalski',type:'Scholarly',tag:'Clinical',meta:'Validated spiritual assessment instrument including prayer assessment for clinical settings.',url:'https://gwish.smhs.gwu.edu/fica-spiritual-history-tool',phase:'phase09'},
+{icon:'📄',title:'Ethics of Prayer in Counseling — ACA Competencies',type:'Scholarly',tag:'Professional',meta:'American Counseling Association competencies for spiritually-sensitive counseling.',url:'https://www.counseling.org/',phase:'phase09'},
+{icon:'📄',title:'Scripture and Counseling — Bob Kellemen',type:'Scholarly',tag:'Scholarly',meta:'Practical and scholarly guide to using Scripture in soul care contexts.',url:'',phase:'phase09'},
+{icon:'📄',title:'Religious Coping — Pargament',type:'Scholarly',tag:'Scholarly',meta:'Research on how clients use Scripture as a coping resource — and when it helps or harms.',url:'',phase:'phase09'},
+{icon:'📄',title:'Journal of Biblical Counseling — CCEF',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed journal focused on Scripture-based counseling methods.',url:'https://www.ccef.org/resources/journals/',phase:'phase09'},
+{icon:'📄',title:'Guilt and Shame — June Price Tangney',type:'Scholarly',tag:'Scholarly',meta:'Definitive psychological research distinguishing guilt (behavioral) from shame (global self).',url:'',phase:'phase09'},
+{icon:'📄',title:'The Spirituality of Imperfection — Kurtz & Ketcham',type:'Scholarly',tag:'Extra-Biblical',meta:'Story-based framework for creating confessional environments that heal rather than wound.',url:'',phase:'phase09'},
+{icon:'📄',title:'Journal of Psychology and Theology — Shame Research',type:'Scholarly',tag:'Journal',meta:'Peer-reviewed studies on shame, guilt, and spiritual healing in clinical practice.',url:'https://journals.sagepub.com/home/ptj',phase:'phase09'},
+{icon:'📄',title:'Worthington\\',type:'Scholarly',tag:'Scholarly',meta:'The most widely-researched empirical forgiveness model — free resources from Dr. Worthington.',url:'https://www.evworthington-forgiveness.com/',phase:'phase09'},
+{icon:'📄',title:'Forgiveness and Reconciliation — Everett Worthington',type:'Scholarly',tag:'Clinical',meta:'Peer-reviewed research confirming forgiveness interventions\\',url:'https://www.evworthington-forgiveness.com/',phase:'phase09'},
+{icon:'📄',title:'Journal of Psychology and Christianity — Forgiveness',type:'Scholarly',tag:'Journal',meta:'Multiple peer-reviewed studies on forgiveness in faith-based counseling contexts.',url:'https://caps.net/jpc/',phase:'phase09'},
+{icon:'📄',title:'The Wounded Healer — Henri Nouwen',type:'Scholarly',tag:'Classic',meta:'The defining text on how the counselor\\',url:'',phase:'phase09'},
+{icon:'📄',title:'Common Factors in Psychotherapy — Lambert & Barley',type:'Scholarly',tag:'Scholarly',meta:'Research showing the therapeutic relationship accounts for 30% of outcome variance — more than technique.',url:'',phase:'phase09'},
+{icon:'📄',title:'Journal of Psychology and Theology — Therapeutic Alliance',type:'Scholarly',tag:'Journal',meta:'Research on the therapeutic relationship in Christian counseling as a vehicle of grace.',url:'https://journals.sagepub.com/home/ptj',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Integration Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on theology, psychology, and whole-person ministry.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'CCEF — Soul Care Resources',type:'Video',tag:'Video',meta:'Center for Biblical Counseling — free articles and videos on integration.',url:'https://www.ccef.org',phase:'phase09'},
+{icon:'▶️',title:'JFIC — Open Access Counseling Journal',type:'Video',tag:'Video',meta:'Journal of Faith Integration in Counseling — free peer-reviewed articles.',url:'https://jfic.researchcommons.org/',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Prayer in Ministry',type:'Video',tag:'Video',meta:'Thomas Walker on the role of prayer in pastoral counseling and care.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'CCEF — Prayer and Counseling Resources',type:'Video',tag:'Video',meta:'Free video and article library on integrating prayer with counseling.',url:'https://www.ccef.org',phase:'phase09'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Teaching on prayer as a therapeutic and pastoral intervention.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Scripture and Healing',type:'Video',tag:'Video',meta:'Walker on using Scripture as a healing rather than wounding tool in ministry.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'CCEF — Scripture in Counseling Videos',type:'Video',tag:'Video',meta:'Free CCEF resources on how to bring Scripture into the helping relationship.',url:'https://www.ccef.org',phase:'phase09'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on the healing power of Scripture in personal and ministry contexts.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Confession and Grace',type:'Video',tag:'Video',meta:'Walker on creating safe spaces for honest confession in ministry contexts.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on the freedom that comes through honest confession and God\\',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase09'},
+{icon:'▶️',title:'JFIC — Guilt, Shame, and Christian Counseling',type:'Video',tag:'Video',meta:'Free open-access research on confession and healing in faith-based counseling.',url:'https://jfic.researchcommons.org/',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Forgiveness Teaching',type:'Video',tag:'Video',meta:'Walker on forgiveness as a clinical and spiritual intervention.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'The Vacuum Effect Series — Restoration Chapters',type:'Video',tag:'Video',meta:'Walker on closing the vacuum through forgiveness — Phase 02 playlist connection.',url:'https://www.youtube.com/watch?v=PLd8keH7MLY&list=PL0sV-2529XGAWpNyBIKr28X2xt8x5RqrF',phase:'phase09'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on forgiveness as a pathway to personal and relational healing.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase09'},
+{icon:'▶️',title:'Reflections of Grace — Redemption and Ministry',type:'Video',tag:'Video',meta:'Walker on the counseling relationship as an embodiment of God\\',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase09'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Denise on being an instrument of redemption in the lives of those you serve.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase09'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Teaching on the counselor\\',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase09'},
+{icon:'📄',title:'The Priene Calendar Inscription (c. 9 BC)',type:'Scholarly',tag:'ANE/Historical',meta:'Provincial decree honoring Augustus that calls the emperor\\',url:'https://archive.org/search?query=priene+inscription+augustus',phase:'phase10'},
+{icon:'📄',title:'Suetonius, Life of Claudius 25.4',type:'Scholarly',tag:'Roman History',meta:'The brief notice that Claudius expelled Jews from Rome because they were continually making disturbances at the instigation of \\',url:'',phase:'phase10'},
+{icon:'📄',title:'Tacitus, Annals 15.44 — Hostile Witness to the Roman Church',type:'Scholarly',tag:'Roman History',meta:'Written c. AD 116, describing Nero\\',url:'',phase:'phase10'},
+{icon:'📄',title:'Martin Luther, Preface to the Epistle to the Romans (1522)',type:'Scholarly',tag:'Historical/Classic',meta:'Luther described wrestling with \\',url:'https://archive.org/search?query=luther+preface+romans+1522',phase:'phase10'},
+{icon:'📄',title:'Roman Housing and the Insula — Archaeological Background',type:'Scholarly',tag:'ANE/Archaeology',meta:'Archaeological work at Ostia, Rome\\',url:'',phase:'phase10'},
+{icon:'📄',title:'John Chrysostom, Homilies on Romans (late 4th century)',type:'Scholarly',tag:'Patristic',meta:'Thirty-two sermons from a preacher famous for pastoral application. Useful to leaders who want to see how the church handled Romans 1–3 seventeen centuries ago.',url:'https://archive.org/search?query=chrysostom+homilies+romans',phase:'phase10'},
+{icon:'📄',title:'Sirach 44:19–21 and 1 Maccabees 2:52 — The Portrait Paul Is Arguing Against',type:'Scholarly',tag:'Second Temple/Extra-Biblical',meta:'Both texts praise Abraham for tested obedience and law-keeping; 1 Maccabees explicitly attaches Genesis 15:6 to the binding of Isaac. These show the interpretation Paul is dismantling with chronology in Romans 4:9–12.',url:'https://archive.org/search?query=sirach+maccabees+abraham',phase:'phase10'},
+{icon:'📄',title:'Greek Business Papyri and the Verb Logizomai',type:'Scholarly',tag:'ANE/Historical',meta:'Documentary papyri from Egypt preserve everyday accounts in which this verb is the ordinary word for entering an amount to someone\\',url:'',phase:'phase10'},
+{icon:'📄',title:'Augustine–Pelagius Controversy on Romans 5:12',type:'Scholarly',tag:'Historical/Patristic',meta:'Much of the fifth-century debate turned on how Romans 5:12 should be construed. The church has argued about this verse for sixteen centuries. Leaders should let a group wrestle with it rather than shutting it down.',url:'https://archive.org/search?query=augustine+pelagius+romans',phase:'phase10'},
+{icon:'📄',title:'Cicero, Pro Rabirio Perduellionis Reo 16 — Crucifixion and Roman Honor',type:'Scholarly',tag:'Roman History/Classic',meta:'Cicero declares the very name of the cross should be far from a Roman citizen\\',url:'',phase:'phase10'},
+{icon:'📄',title:'Jubilees 23:10 — Abraham as Perfect in All His Deeds',type:'Scholarly',tag:'Second Temple/Extra-Biblical',meta:'A second-century BC Jewish text describing Abraham as perfect in all his dealings — the same portrait Paul is dismantling with the chronological argument in Romans 4.',url:'https://archive.org/search?query=jubilees+abraham+ancient',phase:'phase10'},
+{icon:'📄',title:'Journal of Theological Studies — Pauline Theology of Justification',type:'Scholarly',tag:'Journal',meta:'Oxford peer-reviewed scholarship on Romans 4–5, the new perspective on Paul, and the meaning of justification in first-century Jewish context.',url:'https://academic.oup.com/jts',phase:'phase10'},
+{icon:'📄',title:'The Community Rule from Qumran (1QS 3:13–4:26)',type:'Scholarly',tag:'Dead Sea Scrolls/ANE',meta:'Dead Sea Scrolls text teaching that God set two spirits in man — truth and deceit — which struggle within a person. The closest Jewish parallel to Paul\\',url:'https://archive.org/search?query=community+rule+qumran+1QS',phase:'phase10'},
+{icon:'📄',title:'Roman Slavery and Manumission — Background to Romans 6',type:'Scholarly',tag:'Roman History/ANE',meta:'Slavery was woven through the Roman economy and freed persons were a recognized social class with continuing obligations to their former masters. Paul\\',url:'',phase:'phase10'},
+{icon:'📄',title:'Ovid, Metamorphoses 7.20–21 — Pagan Parallel to Romans 7:15',type:'Scholarly',tag:'Classic Literature',meta:'Medea says she sees and approves the better course but follows the worse. Written within a generation of Paul. The ancient world knew the disease. What it did not have was Romans 7:25 and chapter 8.',url:'https://archive.org/search?query=ovid+metamorphoses+medea',phase:'phase10'},
+{icon:'📄',title:'Augustine, Confessions 8.12 — Conversion Through Romans 13:13–14',type:'Scholarly',tag:'Historical/Patristic',meta:'The garden in Milan, the child\\',url:'https://archive.org/search?query=augustine+confessions+tolle+lege',phase:'phase10'},
+{icon:'📄',title:'Augustine\\',type:'Scholarly',tag:'Historical/Patristic',meta:'In his earlier writings Augustine took the wretched man as unconverted; in his later anti-Pelagian works he read it as the Christian\\',url:'',phase:'phase10'},
+{icon:'📄',title:'Roman Funerary Practice and Early Christian Burial Art',type:'Scholarly',tag:'ANE/Archaeology',meta:'Pagan epitaphs in Rome express finality and resignation. Early Christian burial inscriptions in the same city use language of sleep, peace, and resurrection. The contrast in the same graveyards is a quiet historical footnote to Romans 8:38–39.',url:'',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — Romans Teaching Series',type:'Video',tag:'Video',meta:'Thomas E. Walker, MDiv. — Thursday Evening Bible Discussion Series from which this curriculum was built.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Journal of Biblical Literature — Romans Studies',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on Romans, Pauline theology, and the Roman context.',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase10'},
+{icon:'▶️',title:'4QMMT — Dead Sea Scrolls (Qumran)',type:'Video',tag:'Video',meta:'A sectarian document whose title-phrase is commonly rendered \\',url:'https://archive.org/search?query=4QMMT+dead+sea+scrolls',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — Thursday Evening Bible Discussion',type:'Video',tag:'Video',meta:'The original Thursday sessions on Romans from which Modules 1–3 were built.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Devotional teaching and worship content from co-founder Denise Ford-Walker.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase10'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching series from Reflections of Grace Outreach Ministries.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — Abraham\\',type:'Video',tag:'Video',meta:'Thomas Walker on faith, promise, and the God who justifies the ungodly.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Persevering Faith',type:'Video',tag:'Video',meta:'Denise Ford-Walker on waiting for promises and not wavering.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — Romans 4–5 Thursday Discussion',type:'Video',tag:'Video',meta:'Original Thursday Evening session on Abraham\\',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of faith and hope — music that expresses the peace of Romans 5:1.',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase10'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on Romans from Reflections of Grace Outreach Ministries.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — Romans 6–8 Thursday Discussion',type:'Video',tag:'Video',meta:'Original Thursday Evening session on the war within and your place in the race.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — No Condemnation',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Romans 8:1 and the freedom of the Spirit.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase10'},
+{icon:'▶️',title:'Reflections of Grace — \\',type:'Video',tag:'Video',meta:'Thomas Walker on Romans 8:37–39 — the unanswerable questions and the exhaustive list.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase10'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Groaning and Glory',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Romans 8:18–28 — present suffering and coming glory.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase10'},
+{icon:'▶️',title:'Journal of Biblical Literature — Romans 7 Debate',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on the identity of the \\',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase10'},
+{icon:'📄',title:'The Jewish Synagogue Network Across the Empire',type:'Scholarly',tag:'ANE/Historical',meta:'By the first century AD there were Jewish communities across the Mediterranean world — Josephus and Philo document their presence in Alexandria, Antioch, Rome, and hundreds of smaller cities. Paul\\',url:'https://archive.org/search?query=josephus+jewish+diaspora+synagogue',phase:'phase11'},
+{icon:'📄',title:'God-Fearers and Proselytes — Gentile Attachment to the Synagogue',type:'Scholarly',tag:'ANE/Archaeology',meta:'Archaeological inscriptions at Aphrodisias and other sites identify a class of Gentile \\',url:'',phase:'phase11'},
+{icon:'📄',title:'Modern Relevance: Replacement Theology and Jewish-Christian Relations',type:'Scholarly',tag:'Modern',meta:'The history of the church\\',url:'https://www.pewresearch.org/religion/',phase:'phase11'},
+{icon:'📄',title:'The Social Aftermath of the Claudian Expulsion — Romans 14 in Context',type:'Scholarly',tag:'ANE/Historical',meta:'When Jewish believers returned to Rome after Claudius died in AD 54, they returned to congregations that had been Gentile for five years. The disputes about food and holy days in Romans 14 are not abstract — they are the friction of that re-entry. The social history makes the pastoral argument concrete.',url:'',phase:'phase11'},
+{icon:'📄',title:'Josephus, Jewish Antiquities — The Jewish Community in Rome',type:'Scholarly',tag:'ANE/Historical',meta:'Josephus documents the Jewish presence in Rome, including their organized community life, their synagogue gatherings, and their political vulnerability. Provides the social world Paul was writing into.',url:'https://archive.org/search?query=josephus+antiquities+rome',phase:'phase11'},
+{icon:'📄',title:'New Perspective on Paul — N.T. Wright and James Dunn',type:'Scholarly',tag:'Scholarly',meta:'Scholarly debate about what Paul meant by \\',url:'https://academic.oup.com/jts',phase:'phase11'},
+{icon:'📄',title:'Roman Sacrificial Practice — Background to Romans 12:1',type:'Scholarly',tag:'ANE/Historical',meta:'Sacrifice in the Roman world was a public, civic, and religious act — animals were killed, portions burned, portions shared at a feast. Paul\\',url:'',phase:'phase11'},
+{icon:'📄',title:'The Imperial Administration and Taxation — Romans 13:6–7',type:'Scholarly',tag:'ANE/Historical',meta:'Paul specifically mentions taxes (phoros) and tribute (telos) — the two main forms of Roman taxation. Archaeological and papyrological evidence documents these taxes extensively and shows the burden they placed on provincial residents. Paul is talking about real money, not a principle in the abstract.',url:'',phase:'phase11'},
+{icon:'📄',title:'Pliny the Younger, Letters 10.96 to Trajan (c. AD 112)',type:'Scholarly',tag:'Roman History',meta:'A Roman governor describes Christians who met before dawn to sing to Christ as to a God and bound themselves by oath not to commit theft, robbery, or adultery. Written roughly two generations after Romans was composed — an outsider snapshot of Romans 12–13 being practiced.',url:'',phase:'phase11'},
+{icon:'📄',title:'Augustine, Confessions 8.12 — Tolle, Lege',type:'Scholarly',tag:'Historical/Patristic',meta:'The garden in Milan, the child\\',url:'https://archive.org/search?query=augustine+confessions',phase:'phase11'},
+{icon:'📄',title:'Early Christian Ethical Catechesis — The Didache and Romans 12',type:'Scholarly',tag:'Historical/Patristic',meta:'The Didache (c. late first or early second century) shows early Christian communities teaching an ethical catechesis remarkably parallel to Romans 12:9–21 — evidence that Paul\\',url:'https://archive.org/search?query=didache+early+christian',phase:'phase11'},
+{icon:'📄',title:'Modern Relevance: The Renewed Mind and Cognitive Science',type:'Scholarly',tag:'Modern',meta:'Research on neuroplasticity — the brain\\',url:'',phase:'phase11'},
+{icon:'📄',title:'The Erastus Inscription at Corinth — Archaeological Confirmation',type:'Scholarly',tag:'ANE/Archaeology',meta:'A first-century paving stone at Corinth reads \\',url:'https://archive.org/search?query=erastus+inscription+corinth',phase:'phase11'},
+{icon:'📄',title:'Phoebe\\',type:'Scholarly',tag:'Historical',meta:'The terms Paul applies to Phoebe are substantive: diakonos is the word used for male deacons in 1 Timothy 3, and prostatis designates a patron who provides material support and represents others before authority. Phoebe was not a messenger only; she was the official carrier and probably the public reader of the letter in Rome.',url:'',phase:'phase11'},
+{icon:'📄',title:'Tertius the Secretary and Letter-Writing in Antiquity',type:'Scholarly',tag:'ANE/Historical',meta:'Dictation to a secretary (amanuensis) was standard practice in the ancient world for important correspondence. Cicero, Pliny, and others relied on secretaries. Paul\\',url:'',phase:'phase11'},
+{icon:'📄',title:'Jewish Dietary Practice and Meat Sold in Roman Markets',type:'Scholarly',tag:'ANE/Historical',meta:'Meat sold in the Roman market (macellum) had often been sacrificed to idols as part of the normal supply chain. The dispute about food in Romans 14 is not hypothetical — Jewish believers in Rome faced the same question Paul addressed in 1 Corinthians 8–10: what to do about meat whose origin was pagan sacrifice.',url:'',phase:'phase11'},
+{icon:'📄',title:'First-Century Roman House Churches Implied by Romans 16',type:'Scholarly',tag:'ANE/Historical',meta:'Epainetos, Mary, Andronicus and Junia, Ampliatus, Urbanus, Stachys, Apelles, those of the household of Aristobulus, those of the household of Narcissus — the greeting list implies at least five distinct house-church clusters in Rome, not one congregation. Understanding the plural structure changes how you read the entire letter.',url:'',phase:'phase11'},
+{icon:'📄',title:'Modern Relevance: Romans and Congregational Conflict',type:'Scholarly',tag:'Modern',meta:'Research on church conflict and congregational health consistently shows that disputes about secondary matters (worship style, ministry priorities, leadership preferences) are the most common cause of division. Romans 14–15 is the most sustained biblical treatment of exactly that dynamic.',url:'https://www.pewresearch.org/religion/',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — Romans 9–11 Thursday Discussion',type:'Video',tag:'Video',meta:'Thomas E. Walker, MDiv. on God\\',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Devotional teaching on the faithfulness of God to His promises.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase11'},
+{icon:'▶️',title:'Journal of Biblical Literature — Romans 9–11 Studies',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on divine election, Israel, and the Gentiles in Paul\\',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — The Missionary Mandate in Romans 10',type:'Video',tag:'Video',meta:'Thomas Walker on Romans 10:14–17 and the necessity of proclamation.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Music expressing the mystery and mercy of God\\',url:'https://open.spotify.com/show/0txwnSLF5SfFThBQzxFXNf',phase:'phase11'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on the faithfulness of God and the mystery of Israel.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — The Living Sacrifice Teaching',type:'Video',tag:'Video',meta:'Thomas Walker on Romans 12:1–2 and presenting yourself to God.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Renewed Mind',type:'Video',tag:'Video',meta:'Denise Ford-Walker on transformation by the renewing of the mind.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase11'},
+{icon:'▶️',title:'Journal of Theological Studies — Romans 12–13',type:'Video',tag:'Video',meta:'Oxford peer-reviewed scholarship on Paul\\',url:'https://academic.oup.com/jts',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — Christian Ethics in the Real World',type:'Video',tag:'Video',meta:'Thomas Walker on Romans 12–13 and what it means to be a living sacrifice in an ordinary week.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of consecration and renewed purpose from co-founder Denise Ford-Walker.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase11'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on presenting yourself to God and walking in love.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — Romans 14–16 Thursday Discussion',type:'Video',tag:'Video',meta:'Thomas Walker on loving each other after you agree to disagree — the weak, the strong, and the farewell.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Receiving One Another',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Romans 15:7 and the hospitality of Christ as the standard for Christian community.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase11'},
+{icon:'▶️',title:'Journal of Biblical Literature — Phoebe and Romans 16',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on the role of women in the Pauline communities and the significance of Phoebe\\',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase11'},
+{icon:'▶️',title:'Reflections of Grace — Romans 16: The Most Personal Farewell',type:'Video',tag:'Video',meta:'Thomas Walker on Phoebe, Erastus, Tertius, and the twenty-six names Paul greeted in a city he had never visited.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase11'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — The Collection and the Community',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Romans 15 and Paul\\',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase11'},
+{icon:'▶️',title:'Worthington Forgiveness Research — Congregational Healing',type:'Video',tag:'Video',meta:'Research on forgiveness and reconciliation in community settings — directly applicable to the weak-and-strong dynamic and the practice of Romans 15:7.',url:'https://www.evworthington-forgiveness.com/',phase:'phase11'},
+{icon:'📄',title:'Stoic Autarkeia and Paul\\',type:'Scholarly',tag:'ANE/Historical',meta:'Self-sufficiency was a prized Stoic virtue. Paul takes the word and relocates its source: his contentment is not self-generated but derived from Christ who strengthens him. Useful for distinguishing biblical contentment from mere self-satisfaction.',url:'',phase:'phase12'},
+{icon:'📄',title:'Laodicea\\',type:'Scholarly',tag:'ANE/Archaeology',meta:'Nearby Hierapolis was famous for hot mineral springs; Colossae for cold water; Laodicea\\',url:'',phase:'phase12'},
+{icon:'📄',title:'Robert K. Greenleaf, The Servant as Leader (1970)',type:'Scholarly',tag:'Modern/Scholarly',meta:'The modern origin of \\',url:'',phase:'phase12'},
+{icon:'📄',title:'Hebrew Shama — One Verb for Hearing and Obeying',type:'Scholarly',tag:'ANE/Language',meta:'Biblical Hebrew uses one verb for hearing and heeding; the sense of compliance is carried by the same word, often with the phrase \\',url:'',phase:'phase12'},
+{icon:'📄',title:'Hebrew Qol Demamah Daqqah (1 Kings 19:12) — A Sound of Thin Silence',type:'Scholarly',tag:'ANE/Language',meta:'The phrase is deliberately odd in Hebrew — \\',url:'',phase:'phase12'},
+{icon:'📄',title:'The Ketef Hinnom Silver Amulets (late 7th–early 6th century BC)',type:'Scholarly',tag:'ANE/Archaeology',meta:'Two tiny inscribed silver scrolls found in a Jerusalem burial chamber, generally dated to Josiah\\',url:'https://archive.org/search?query=ketef+hinnom+silver+amulets',phase:'phase12'},
+{icon:'📄',title:'Near Eastern Shepherding Practice and John 10',type:'Scholarly',tag:'ANE/Historical',meta:'Reports from travelers and residents in the Near East describe several flocks sharing a common fold overnight, then separating in the morning as each shepherd calls his own out by voice. The observation matches John 10:3–5 precisely and explains why Jesus grounds discernment in familiarity rather than in analysis.',url:'',phase:'phase12'},
+{icon:'📄',title:'Habakkuk 2:2 and Public Inscription in the Ancient World',type:'Scholarly',tag:'ANE/Historical',meta:'The instruction to write the vision on tablets so a runner can read it reflects the ancient practice of posting public notices legibly enough to be taken in at speed — civic inscriptions, imperial edicts, commercial announcements. Applied: guidance that has never been recorded cannot be tested.',url:'',phase:'phase12'},
+{icon:'📄',title:'The Berean Method — Acts 17:11 as a Historical Practice',type:'Scholarly',tag:'Historical',meta:'The Bereans searched the Scriptures daily to check what an apostle told them — and Luke calls them more noble for doing it. Verification of claimed guidance against Scripture is commended, not merely tolerated. This is the oldest documented form of doctrinal discernment in the church.',url:'',phase:'phase12'},
+{icon:'📄',title:'Jeroboam\\',type:'Scholarly',tag:'ANE/Archaeology',meta:'1 Kings 12:28–30 records golden calves set up at Dan and Bethel; excavations at Tel Dan have revealed a large cultic platform consistent with a royal sanctuary. The man of God was not protesting private superstition — he was confronting official state religion, which is why the king\\',url:'https://archive.org/search?query=tel+dan+sanctuary+jeroboam',phase:'phase12'},
+{icon:'📄',title:'The Tel Dan Stele (9th century BC) — Earliest Reference to House of David',type:'Scholarly',tag:'ANE/Archaeology',meta:'An Aramaic victory inscription mentioning the \\',url:'https://archive.org/search?query=tel+dan+stele+house+david',phase:'phase12'},
+{icon:'📄',title:'Hebrew Shuv — Return — and the Road Home in 1 Kings 13',type:'Scholarly',tag:'ANE/Language',meta:'The instruction to the man of God included not returning by the way he came. Sitting under the oak and then going back to Bethel reversed the last of the three conditions before he ever reached the table. Small reversals precede large ones.',url:'',phase:'phase12'},
+{icon:'📄',title:'Ancient Near Eastern Vassal Treaties and Deuteronomy 28',type:'Scholarly',tag:'ANE/Historical',meta:'Hittite treaty documents of the second millennium BC and Assyrian treaties of the seventh century (including those of Esarhaddon) share a recognizable structure: preamble, historical prologue, stipulations, deposit and public reading, witnesses, blessings and curses. Deuteronomy follows this pattern closely — Josiah heard a legal covenant document, not a collection of religious advice.',url:'https://archive.org/search?query=hittite+suzerainty+treaty+covenant',phase:'phase12'},
+{icon:'📄',title:'Hebrew Shama Be-Qol — Hear With the Voice — and 1 Samuel 15:22',type:'Scholarly',tag:'ANE/Language',meta:'The idiom Samuel uses for obedience in 15:22 is literally about heeding a voice. The whole module\\',url:'',phase:'phase12'},
+{icon:'📄',title:'Deuteronomy 25:17–19 and the Amalekite Charge — Leader\\',type:'Scholarly',tag:'ANE/Historical',meta:'The command to devote Amalek to destruction is grounded in a specific historical attack on Israel\\',url:'',phase:'phase12'},
+{icon:'📄',title:'The Babylonian Chronicle and the Fall of Nineveh (612 BC)',type:'Scholarly',tag:'ANE/Historical',meta:'A cuneiform record in the British Museum documents the collapse of Assyria. The political vacuum created by Assyria\\',url:'https://archive.org/search?query=babylonian+chronicle+nineveh',phase:'phase12'},
+{icon:'📄',title:'The Huldah Gates — Archaeological and Traditional Background',type:'Scholarly',tag:'ANE/Archaeology',meta:'Later Jewish tradition attaches the prophetess Huldah\\',url:'',phase:'phase12'},
+{icon:'📄',title:'The Didache 8 and Early Christian Fasting — Background to Isaiah 58',type:'Scholarly',tag:'Historical/Patristic',meta:'This early Christian manual instructs believers to fast on different days than \\',url:'https://archive.org/search?query=didache+fasting+early+christian',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Living Up to Your Spiritual Potential',type:'Video',tag:'Video',meta:'Thomas Walker on capacity, contentment, and complacency — from the May 20, 2021 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Devotional teaching on identity, calling, and the life poured out in service.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'▶️',title:'TikTok — @thomaswalker41011',type:'Video',tag:'Video',meta:'Short-form prophetic and teaching content on calling and servant leadership.',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Hearing Versus Listening to God',type:'Video',tag:'Video',meta:'Thomas Walker on shama, the still small voice, and the distinction that changes everything — from the May 27, 2021 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Listening to God',type:'Video',tag:'Video',meta:'Denise Ford-Walker on the practice of listening — from the June 3, 2021 Thursday session.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on hearing and listening to God from Reflections of Grace Outreach Ministries.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Learning to Know the Voice',type:'Video',tag:'Video',meta:'Thomas Walker on discernment, the watchman\\',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Stay on the Path',type:'Video',tag:'Video',meta:'Denise Ford-Walker on 1 John 2 and keeping your footing when a second voice speaks.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'▶️',title:'TikTok — @thomaswalker41011',type:'Video',tag:'Video',meta:'Short-form teaching on discernment, spiritual authority, and testing what you hear.',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Stay on the Path, Just Stay on the Path',type:'Video',tag:'Video',meta:'Thomas Walker on 1 Kings 13 and the test that comes after the test is passed — December 12 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — 1 John 2',type:'Video',tag:'Video',meta:'Denise Ford-Walker on abiding, staying, and not being moved by what sounds spiritual but contradicts what God has said.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching on endurance, the second voice, and finishing well.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Saul the King: Your Decisions Can Change Your Future',type:'Video',tag:'Video',meta:'Thomas Walker on 1 Samuel 15, partial obedience, and the three excuses — July 8, 2021 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — When We Know Better, We Do Better',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Josiah, Saul, and the gap between knowing and doing.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'▶️',title:'TikTok — @thomaswalker41011',type:'Video',tag:'Video',meta:'Short-form teaching on obedience, partial compliance, and the cost of Agag.',url:'https://www.tiktok.com/@thomaswalker41011',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — Your Breakthrough Is Near: Are You Prepared?',type:'Video',tag:'Video',meta:'Thomas Walker on Isaiah 58, 2 Samuel 6, and the Repairer of the Breach — July 15, 2021 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Reflections of Grace — When We Know Better, We Do Better',type:'Video',tag:'Video',meta:'Thomas Walker on Josiah, Huldah, and the gap between knowing and doing — July 22, 2021 Thursday session.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase12'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — The Repairer of the Breach',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Isaiah 58 and becoming the breakthrough for someone else.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase12'},
+{icon:'📄',title:'Galatia — The Roman Province and Paul\\',type:'Scholarly',tag:'ANE/Historical',meta:'The Roman province of Galatia covered a large swath of what is now north-central Turkey. Debate persists between a \\',url:'',phase:'phase13'},
+{icon:'📄',title:'The 613 Commandments — Talmud Makkot 23b and Galatians 5:3',type:'Scholarly',tag:'ANE/Historical',meta:'Rabbi Simlai\\',url:'https://archive.org/search?query=talmud+makkot+613+commandments',phase:'phase13'},
+{icon:'📄',title:'The Judaizers — Identity, Strategy, and Motivation',type:'Scholarly',tag:'ANE/Historical',meta:'The \\',url:'',phase:'phase13'},
+{icon:'📄',title:'Table Fellowship in Jewish and Gentile Contexts — Background to Galatians 2:11-14',type:'Scholarly',tag:'ANE/Historical',meta:'Sharing a meal in the ancient world carried deep social and purity implications. For Jewish believers, eating with Gentiles was a boundary-crossing act — that is exactly why the circumcision party\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Jewish Law: Ceremonial, Civil, and Moral — The Distinction in Galatians',type:'Scholarly',tag:'ANE/Historical',meta:'The document notes that Jewish law was traditionally divided into ceremonial (sacrifices, dietary rules, circumcision), civil (governance of Israel as a nation), and moral (the Decalogue\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Martin Luther\\',type:'Scholarly',tag:'Historical/Classic',meta:'Luther called Galatians \\',url:'https://archive.org/search?query=luther+commentary+galatians+1535',phase:'phase13'},
+{icon:'📄',title:'The Paidagogos in Greek and Roman Household Practice',type:'Scholarly',tag:'ANE/Historical',meta:'Literary and documentary evidence from the Greco-Roman world describes the paidagogos (from pais, child + agein, to lead) as a trusted household slave who escorted the child to school, enforced discipline, and returned the child home safely. He was not the teacher. Paul\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Deuteronomy 27:26 — The Curse of the Law and Galatians 3:10',type:'Scholarly',tag:'ANE/Historical',meta:'Cursed is everyone who does not continue in all the words of this law, to do them. Paul quotes this to establish that the law requires perfect, continual obedience — partial compliance does not qualify. Understanding that the curse is built into the law\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Second Temple Judaism and the Identity Markers — Background to Galatians 3:28',type:'Scholarly',tag:'ANE/Historical',meta:'In first-century Judaism the boundary markers of circumcision, Sabbath observance, and dietary laws functioned as identity badges distinguishing God\\',url:'https://archive.org/search?query=second+temple+judaism+identity+markers',phase:'phase13'},
+{icon:'📄',title:'The Pax Romana, Koine Greek, and Roman Roads — \\',type:'Scholarly',tag:'ANE/Historical',meta:'The Roman peace (c. 27 BC–AD 180) reduced travel danger; koine Greek was understood across the empire; Roman roads and sea lanes connected the Mediterranean world. The synagogue diaspora provided Paul with a foothold in city after city. These conditions are the historical backdrop to \\',url:'',phase:'phase13'},
+{icon:'📄',title:'Roman Adoption (Adoptio) — Background to Galatians 4:5 and Romans 8:15',type:'Scholarly',tag:'ANE/Historical',meta:'In Roman law, adoption was a formal, irrevocable legal act: the adopted son took the adoptive father\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Circumcision in the Old Testament — From Genesis 17 to Deuteronomy 10:16',type:'Scholarly',tag:'ANE/Historical',meta:'The course appendix traces circumcision from Genesis 17 through Joshua 5, noting that Deuteronomy 10:12–16 calls Israel to circumcise their hearts — the physical rite was always meant to signify a change of heart, not substitute for one. When the Judaizers pressed physical circumcision as a salvation requirement, they were missing what circumcision itself had always pointed toward.',url:'',phase:'phase13'},
+{icon:'📄',title:'Greek Stēkete — The Military Vocabulary of Galatians 5:1',type:'Scholarly',tag:'ANE/Language',meta:'The verb stēkō (stand fast, hold position) is a Hellenistic formation that carries connotations of a soldier holding a position under pressure. Paul\\',url:'',phase:'phase13'},
+{icon:'📄',title:'The Stoic Virtue List and Paul\\',type:'Scholarly',tag:'ANE/Historical',meta:'Stoic philosophy had its own virtue lists — wisdom, courage, justice, temperance — aimed at the cultivation of character through reason and discipline. Paul\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Leviticus 19:18 — \\',type:'Scholarly',tag:'ANE/Historical',meta:'Paul\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Stigmata — Slave Branding, Soldier Tattooing, and Sacred Marks in Antiquity',type:'Scholarly',tag:'ANE/Historical',meta:'In the ancient world stigmata were marks branded onto slaves (indicating ownership) and tattooed onto soldiers (indicating unit affiliation) or temple devotees (indicating dedication to a deity). Paul\\',url:'',phase:'phase13'},
+{icon:'📄',title:'The Sowing-and-Reaping Principle in Near Eastern Wisdom Literature',type:'Scholarly',tag:'ANE/Historical',meta:'The principle of reaping what one sows appears in Egyptian wisdom literature (the Book of the Dead\\',url:'',phase:'phase13'},
+{icon:'📄',title:'Moody Handbook of Theology — Recommended in the Course Appendix',type:'Scholarly',tag:'Modern/Scholarly',meta:'The original Galatians course materials cite Paul Enns\\',url:'https://www.moodypublishers.com',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — Survey of the Book of Galatians',type:'Video',tag:'Video',meta:'Thomas E. Walker, MDiv. — original session: biblestudysurveyofthebookofGalatians72114CD.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — YouTube',type:'Video',tag:'Video',meta:'Devotional teaching on grace, calling, and the life that faith produces.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase13'},
+{icon:'▶️',title:'ROG Ministry Podcast — Spotify',type:'Video',tag:'Video',meta:'Audio teaching from Reflections of Grace Outreach Ministries on Galatians and the gospel of grace.',url:'https://open.spotify.com/show/0ZEHoURQOg4EVOGku734QA',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — Faith vs. Legalism (Galatians Chapter 2)',type:'Video',tag:'Video',meta:'Thomas Walker — original session: biblestudyFaithvsLegalismGalatiansCHP272814CD.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Standing on the Truth in Love',type:'Video',tag:'Video',meta:'Denise Ford-Walker on the courage Paul showed at Antioch and what it means to stand when the crowd moves.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase13'},
+{icon:'▶️',title:'Journal of Biblical Literature — Justification in Galatians',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on the new perspective on Paul, the meaning of \\',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — What Is Wrong With You? (Galatians Chapter 3)',type:'Video',tag:'Video',meta:'Thomas Walker — original session: biblestudywhatiswrongwithyou8414.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Trusting What God Has Said',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Habakkuk 2:4 and the faith that holds when circumstances argue against it.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase13'},
+{icon:'▶️',title:'Journal of Theological Studies — Galatians 3 and Covenant Theology',type:'Video',tag:'Video',meta:'Oxford peer-reviewed scholarship on the Abrahamic and Mosaic covenants, the paidagogos image, and the unity of Jew and Greek in Christ.',url:'https://academic.oup.com/jts',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — Old Bondage, New Liberty (Galatians Chapter 4)',type:'Video',tag:'Video',meta:'Thomas Walker — original session: BibleStudyOldBondageNewLiberty81114.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — Abba Father',type:'Video',tag:'Video',meta:'Denise Ford-Walker on relating to God as Father — what changes when \\',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase13'},
+{icon:'▶️',title:'Journal of Biblical Literature — Covenant Theology and Galatians 4',type:'Video',tag:'Video',meta:'Peer-reviewed scholarship on Abrahamic and Mosaic covenants, the allegory of Hagar and Sarah, and the transition to the New Covenant.',url:'https://www.sbl-site.org/publications/journalofbiblicalliterature.aspx',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — Am I Free? (Galatians Chapter 5)',type:'Video',tag:'Video',meta:'Thomas Walker — original session: biblediscussionAMIFREE92214CD.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Songs of freedom, joy, and the Spirit\\',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase13'},
+{icon:'▶️',title:'Journal of Theological Studies — Galatians 5 and Pauline Ethics',type:'Video',tag:'Video',meta:'Oxford peer-reviewed scholarship on the flesh-Spirit conflict, the fruit of the Spirit, and the coherence of Paul\\',url:'https://academic.oup.com/jts',phase:'phase13'},
+{icon:'▶️',title:'Reflections of Grace — Your Love Is a Supernatural Thing (Galatians Chapter 6)',type:'Video',tag:'Video',meta:'Thomas Walker — original session: BiblediscussionYourloveisasupernaturalThingGAL6CD.',url:'https://www.youtube.com/@reflectionsofgraceoutreach633',phase:'phase13'},
+{icon:'▶️',title:'Walking with Denise Ford-Walker — The Marks of Faithful Ministry',type:'Video',tag:'Video',meta:'Denise Ford-Walker on Galatians 6:17 and what authentic ministry costs.',url:'https://www.youtube.com/@walkingwithdenisefordwalker',phase:'phase13'},
+{icon:'▶️',title:'Denise\\',type:'Video',tag:'Video',meta:'Worship songs expressing supernatural love, new creation, and burden-bearing community.',url:'https://www.youtube.com/@denisesinspirationalmelodi6408',phase:'phase13'},
+{icon:'🎬',title:'BibleProject',type:'Media',tag:'YouTube',meta:'Animated biblical scholarship — all phases',url:'https://www.youtube.com/channel/UCVfwlh9XpX2Y_tQfjeln9QA',phase:'all'},
+{icon:'🏛️',title:'Dallas Theological Seminary',type:'Media',tag:'YouTube',meta:'Free seminary courses',url:'https://www.youtube.com/dallasseminary',phase:'phase10,phase11,phase13'},
+{icon:'📚',title:'Ligonier Ministries — R.C. Sproul',type:'Media',tag:'Academic',meta:'Romans & Galatians series',url:'https://learn.ligonier.org/series/galatians',phase:'phase10,phase11,phase13'},
+{icon:'📜',title:'Tyndale House Cambridge',type:'Media',tag:'YouTube',meta:'Evangelical biblical scholarship',url:'https://www.youtube.com/@TyndaleHouse',phase:'phase10,phase11,phase12,phase13'},
+{icon:'🎓',title:'Open Yale — New Testament',type:'Media',tag:'Academic',meta:'Free university lecture series',url:'https://oyc.yale.edu/religious-studies/rlst-152',phase:'phase10,phase11,phase13'},
+{icon:'⛏️',title:'Expedition Bible — Joel Kramer',type:'Media',tag:'YouTube',meta:'On-site biblical archaeology',url:'https://www.youtube.com/@ExpeditionBible',phase:'phase10,phase11,phase12,phase13'},
+{icon:'🏺',title:'British Museum',type:'Media',tag:'Museum',meta:'Dead Sea Scrolls & ancient Israel',url:'https://www.youtube.com/@britishmuseum',phase:'phase10,phase11,phase12,phase13'},
+{icon:'📜',title:'Dead Sea Scrolls Digital Library',type:'Media',tag:'Digital Archive',meta:'Israel Antiquities Authority — free access',url:'https://www.deadseascrolls.org.il/',phase:'phase10,phase11,phase12,phase13'},
+{icon:'💬',title:'Mike Winger — BibleThinker',type:'Media',tag:'YouTube',meta:'Verse-by-verse Bible study',url:'https://www.youtube.com/@MikeWinger',phase:'phase10,phase11,phase13'},
+{icon:'⚖️',title:'Cross Examined — Frank Turek',type:'Media',tag:'Apologetics',meta:'Apologetics & campus debates',url:'https://www.youtube.com/@CrossExamined_org',phase:'phase10,phase11,phase13'},
+{icon:'🎯',title:'The Gospel Coalition',type:'Media',tag:'Ministry',meta:'Scholarly teaching & discussion',url:'https://www.thegospelcoalition.org/',phase:'phase10,phase11,phase12,phase13'},
+{icon:'📖',title:'Priscilla Shirer',type:'Media',tag:'YouTube',meta:'Deep Bible study & discernment',url:'https://www.youtube.com/@PriscillaShirer',phase:'phase07,phase08,phase12'},
+{icon:'🧠',title:'CCEF',type:'Media',tag:'Academic',meta:'Faith-psychology integration — free articles',url:'https://www.ccef.org/resources/',phase:'phase03,phase09'},
+{icon:'🎤',title:'Sean McDowell',type:'Media',tag:'YouTube',meta:'Scholar interviews & apologetics',url:'https://www.youtube.com/@SeanMcDowell',phase:'all'},
+{icon:'📄',title:'Ancient Jew Review',type:'Media',tag:'Journal',meta:'Second Temple Judaism — open access',url:'https://www.ancientjewreview.com/',phase:'phase10,phase11,phase13'},
+{icon:'📚',title:'The Complete Works of Josephus — Antiquities of the Jews',type:'Free eBook',tag:'Ancient History',meta:'Project Gutenberg — free full text',url:'https://www.gutenberg.org/ebooks/2848',phase:'phase10,phase11,phase12,phase13'},
+{icon:'📚',title:'Early Church Fathers — Complete Set',type:'Free eBook',tag:'Patristics',meta:'Christian Classics Ethereal Library — free',url:'https://www.ccel.org/fathers.html',phase:'all'},
+{icon:'📚',title:'Augustine — Confessions',type:'Free eBook',tag:'Church History',meta:'Project Gutenberg — full text',url:'https://www.gutenberg.org/ebooks/3296',phase:'phase01,phase04,phase07'},
+{icon:'📚',title:'C.S. Lewis — Mere Christianity (Study Guide)',type:'Free eBook',tag:'Apologetics',meta:'C.S. Lewis Institute — free resources',url:'https://www.cslewisinstitute.org/resources/',phase:'phase01,phase02,phase04'},
+{icon:'📚',title:'Dietrich Bonhoeffer — The Cost of Discipleship',type:'Free eBook',tag:'Discipleship',meta:'Internet Archive — free access',url:'https://archive.org/search?query=cost+of+discipleship+bonhoeffer',phase:'phase01,phase04,phase12'},
+{icon:'📚',title:'A.W. Tozer — The Pursuit of God',type:'Free eBook',tag:'Spiritual Formation',meta:'Project Gutenberg — full text',url:'https://www.gutenberg.org/ebooks/25141',phase:'phase04,phase07,phase12'},
+{icon:'📚',title:'John Calvin — Institutes of the Christian Religion',type:'Free eBook',tag:'Theology',meta:'CCEL — free full text',url:'https://www.ccel.org/ccel/calvin/institutes.html',phase:'phase01,phase10,phase11,phase13'},
+{icon:'📚',title:'Martin Luther — Commentary on Galatians',type:'Free eBook',tag:'Reformation',meta:'Project Gutenberg — full text',url:'https://www.gutenberg.org/ebooks/1529',phase:'phase13'},
+{icon:'📖',title:'Strong\'s Concordance — Online',type:'Free eBook',tag:'Bible Study Tool',meta:'Blue Letter Bible — free lexicon',url:'https://www.blueletterbible.org/lexicon/g4102/kjv/tr/0-1/',phase:'all'},
+{icon:'📖',title:'Vine\'s Expository Dictionary — Online',type:'Free eBook',tag:'Bible Study Tool',meta:'StudyLight.org — free access',url:'https://www.studylight.org/dictionaries/eng/ved.html',phase:'all'},
+{icon:'📖',title:'Matthew Henry Commentary — Complete',type:'Free eBook',tag:'Commentary',meta:'CCEL — full commentary free',url:'https://www.ccel.org/ccel/henry/mhc.html',phase:'all'},
+{icon:'📖',title:'Adam Clarke Commentary — Complete',type:'Free eBook',tag:'Commentary',meta:'StudyLight.org — free access',url:'https://www.studylight.org/commentaries/eng/acc.html',phase:'all'},
+{icon:'📄',title:'Journal of the Evangelical Theological Society (JETS)',type:'Journal',tag:'Peer-Reviewed',meta:'Full archive — many articles free',url:'https://www.etsjets.org/JETS',phase:'phase01,phase10,phase11,phase13'},
+{icon:'📄',title:'Journal of Biblical Literature (JBL)',type:'Journal',tag:'Peer-Reviewed',meta:'Society of Biblical Literature',url:'https://www.sbl-site.org/publications/journal_jbl.aspx',phase:'phase10,phase11,phase13'},
+{icon:'📄',title:'Journal of Theological Studies (JTS)',type:'Journal',tag:'Peer-Reviewed',meta:'Oxford Academic — some open access',url:'https://academic.oup.com/jts',phase:'phase10,phase11,phase13'},
+{icon:'📄',title:'Journal of Psychology & Theology',type:'Journal',tag:'Peer-Reviewed',meta:'Sage — faith-integration scholarship',url:'https://journals.sagepub.com/home/ptj',phase:'phase03,phase09'},
+{icon:'📄',title:'Journal of Psychology & Christianity (CAPS)',type:'Journal',tag:'Peer-Reviewed',meta:'Christian Association for Psychological Studies',url:'https://caps.net/journal',phase:'phase03,phase09'},
+{icon:'📄',title:'Journal for the Scientific Study of Religion',type:'Journal',tag:'Peer-Reviewed',meta:'Wiley — sociology of religion',url:'https://onlinelibrary.wiley.com/journal/14685906',phase:'phase02,phase06'},
+{icon:'📄',title:'Ancient Jew Review',type:'Journal',tag:'Open Access',meta:'Open access — Second Temple Judaism',url:'https://www.ancientjewreview.com/',phase:'phase10,phase11,phase13'},
+{icon:'🏛️',title:'JSTOR — Open Access Articles',type:'Digital Archive',tag:'Multi-disciplinary',meta:'Thousands of free scholarly articles',url:'https://www.jstor.org/action/showOpenAccess',phase:'all'},
+{icon:'🔍',title:'Google Scholar',type:'Digital Archive',tag:'Search Engine',meta:'Free access to scholarly papers',url:'https://scholar.google.com',phase:'all'},
+{icon:'🏛️',title:'Internet Archive',type:'Digital Archive',tag:'Digital Library',meta:'Free books, texts, and media',url:'https://archive.org/search?query=biblical+studies',phase:'all'},
+{icon:'📖',title:'Bible Gateway',type:'Digital Archive',tag:'Bible Tool',meta:'Free Bible in 50+ translations',url:'https://www.biblegateway.com',phase:'all'},
+{icon:'📖',title:'Blue Letter Bible',type:'Digital Archive',tag:'Bible Tool',meta:'Free lexicon, commentary, concordance',url:'https://www.blueletterbible.org',phase:'all'},
+{icon:'📖',title:'Bible Hub',type:'Digital Archive',tag:'Bible Tool',meta:'Interlinear, commentaries, concordance',url:'https://biblehub.com',phase:'all'},
+{icon:'📚',title:'Christian Classics Ethereal Library (CCEL)',type:'Digital Archive',tag:'Digital Library',meta:'Thousands of free Christian books',url:'https://www.ccel.org',phase:'all'},
+{icon:'📚',title:'Project Gutenberg — Religion',type:'Digital Archive',tag:'Digital Library',meta:'Public domain theological works',url:'https://www.gutenberg.org/ebooks/bookshelf/7',phase:'all'},
+{icon:'🏛️',title:'Perseus Digital Library — Ancient Texts',type:'Ancient History',tag:'Classical',meta:'Tufts University — free Greek & Latin texts',url:'https://www.perseus.tufts.edu/hopper/',phase:'phase10,phase11,phase13'},
+{icon:'🏺',title:'ANET — Ancient Near East Texts (selections)',type:'Ancient History',tag:'ANE',meta:'ETANA — electronic texts in Near Eastern studies',url:'https://www.etana.org',phase:'phase10,phase11,phase12,phase13'},
+{icon:'📜',title:'Josephus — Jewish Antiquities (complete)',type:'Ancient History',tag:'Jewish History',meta:'UChicago — free online translation',url:'https://penelope.uchicago.edu/josephus/ant-1.html',phase:'phase10,phase11,phase12,phase13'},
+{icon:'📜',title:'Dead Sea Scrolls — Complete Digital Library',type:'Ancient History',tag:'DSS',meta:'Israel Antiquities Authority — free',url:'https://www.deadseascrolls.org.il',phase:'phase10,phase11,phase12,phase13'}
+];
+
+var _ft='all',_fp='all',_sq='';
+function phases(str){if(!str||str==='all')return Object.keys(PHASE_META);return str.split(',').map(function(s){return s.trim();});}
+function match(item){
+  var typeOk=_ft==='all'||item.type===_ft;
+  var ph=phases(item.phase);
+  var phOk=_fp==='all'||ph.indexOf(_fp)>=0||item.phase==='all';
+  var q=_sq.toLowerCase();
+  var sOk=!q||(item.title+' '+item.meta+' '+item.tag+' '+item.type+' '+item.phase).toLowerCase().indexOf(q)>=0;
+  return typeOk&&phOk&&sOk;
+}
+function card(item){
+  var ph=phases(item.phase);
+  var badges='';
+  if(item.phase==='all'){
+    badges='<span class="lpb" style="color:var(--gold-lt);border-color:var(--gold);background:rgba(56,168,232,.12)">All Phases</span>';
+  } else {
+    badges=ph.slice(0,8).map(function(pid){
+      var pm=PHASE_META[pid];if(!pm)return '';
+      return '<a href="https://reflectionsofgracebiblestudies.netlify.app/#/phase/'+pid+'" target="_blank" class="lpb" style="color:'+pm.color+';border-color:'+pm.color+';background:'+pm.color+'22;opacity:.8" title="Phase '+pm.num+': '+pm.title+'">P'+pm.num+'</a>';
+    }).join('');
+  }
+  var btn=item.url?'<a href="'+item.url+'" target="_blank" rel="noopener" class="lo">Open &#8599;</a>':'<span class="lnu">Search online</span>';
+  var tagBadge=item.tag&&item.tag!==item.type?'<span class="ltb" style="background:rgba(240,248,255,.07);border-color:rgba(240,248,255,.12);color:rgba(240,248,255,.55)">'+item.tag+'</span>':'';
+  return '<div class="lib-card">'
+    +'<div class="lct"><div class="lci">'+item.icon+'</div>'
+    +'<div class="lcti">'+item.title+'</div></div>'
+    +(item.meta?'<div class="lcm">'+item.meta+'</div>':'')
+    +'<div class="lctags"><span class="ltb">'+item.type+'</span>'+tagBadge+'</div>'
+    +'<div class="lctags">'+badges+'</div>'
+    +btn+'</div>';
+}
+
+function renderPhasePanel(){
+  if(_fp==='all') return '';
+  var pm=PHASE_META[_fp]; if(!pm) return '';
+  var tp='https://reflectionsofgracebiblestudies.netlify.app';
+  var hub='https://rog-access-hub.netlify.app';
+  var btn=function(label,href){
+    return '<a href="'+href+'" target="_blank" rel="noopener" '
+      +'style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;'
+      +'background:rgba(56,168,232,.12);border:1px solid rgba(56,168,232,.3);'
+      +'border-radius:8px;font-size:13px;font-weight:600;color:var(--gold-lt);'
+      +'text-decoration:none;font-family:var(--ff-b)">'+label+'</a>';
+  };
+  var isPhase13 = (_fp === 'phase13');
+  var extraBtns = isPhase13
+    ? btn('📜 Research Archive',  tp+'/#/research')
+        + btn('📚 Resource Library', 'https://rog-library.netlify.app')
+    : '';
+
+  return '<div style="background:rgba(240,248,255,.06);border:1px solid rgba(56,168,232,.2);'
+    +'border-radius:12px;padding:20px 22px;margin-bottom:20px;border-left:4px solid '+pm.color+'">'
+    +'<div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px">'
+    +'<div style="width:42px;height:42px;border-radius:50%;background:'+pm.color+';display:flex;'
+    +'align-items:center;justify-content:center;color:#fff;font-family:var(--ff-sc);'
+    +'font-size:13px;font-weight:700;flex-shrink:0">'+pm.num+'</div>'
+    +'<div style="flex:1"><div style="font-family:var(--ff-d);font-size:20px;font-weight:700;'
+    +'color:var(--gold-lt);line-height:1.2">Phase '+pm.num+' — '+pm.title+'</div>'
+    +'<div style="font-size:13px;color:rgba(240,248,255,.55);margin-top:4px">'
+    +(isPhase13 ? '📜 Galatians: Faith, Freedom &amp; Life in the Spirit — Six-Module Research Study' : 'Showing all resources matched to this phase below')
+    +'</div></div></div>'
+    +(isPhase13 ? '<div style="background:rgba(10,42,110,.25);border:1px solid rgba(56,168,232,.3);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:rgba(56,168,232,.9)">📜 This is the Phase 13 Research Archive — six recorded Bible-study sessions on Galatians with full hermeneutics, discussion, review questions, and life application.</div>' : '')
+    +'<div style="font-family:var(--ff-sc);font-size:10px;letter-spacing:.12em;'
+    +'text-transform:uppercase;color:rgba(56,168,232,.6);margin-bottom:10px">Study This Phase</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:9px">'
+    +btn('📖 Study Guide', tp+'/#/phase/'+_fp)
+    +btn('✏️ Quiz',        tp+'/#/phase/'+_fp+'/unit/0')
+    +btn('💬 Discussion',  tp+'/#/phase/'+_fp+'/unit/0')
+    +btn('🔗 Resources',   tp+'/#/phase/'+_fp)
+    +extraBtns
+    +btn('🌐 Access Hub',  hub)
+    +'</div></div>';
+}
+
+function renderLib(){
+  var filtered=LIBRARY_DATA.filter(match);
+  document.getElementById('stat-total').textContent=LIBRARY_DATA.length;
+  document.getElementById('rc').textContent=filtered.length+' of '+LIBRARY_DATA.length+' resources';
+  document.getElementById('lib-grid').innerHTML=renderPhasePanel()+filtered.map(card).join('');
+}
+function buildPhaseFilters(){
+  var row=document.getElementById('phase-filters');
+  Object.keys(PHASE_META).forEach(function(pid){
+    var pm=PHASE_META[pid];
+    var b=document.createElement('button');
+    b.className='pc';b.setAttribute('data-fp',pid);
+    b.style.color=pm.color;b.style.borderColor=pm.color;b.style.background=pm.color+'22';
+    b.textContent=pm.num+' · '+pm.title.substring(0,22);
+    b.onclick=function(){
+      _fp=pid;
+      document.querySelectorAll('[data-fp]').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');renderLib();
+    };
+    row.appendChild(b);
+  });
+}
+function init(){
+  buildPhaseFilters();renderLib();
+  document.getElementById('lib-search').oninput=function(e){_sq=e.target.value;renderLib();};
+  document.querySelectorAll('[data-ft]').forEach(function(b){
+    b.onclick=function(){
+      _ft=b.getAttribute('data-ft');
+      document.querySelectorAll('[data-ft]').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');renderLib();
+    };
+  });
+  document.querySelector('[data-fp="all"]').onclick=function(){
+    _fp='all';
+    document.querySelectorAll('[data-fp]').forEach(function(x){x.classList.remove('active');});
+    this.classList.add('active');renderLib();
+  };
+}
+document.addEventListener('DOMContentLoaded',init);
+if(document.readyState==='complete'||document.readyState==='interactive'){init();}
+
+</script>
+</body>
+</html>
